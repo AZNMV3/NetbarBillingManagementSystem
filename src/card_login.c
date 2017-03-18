@@ -109,7 +109,7 @@ void shut_core(char id[]) {
 	int time_left_interval = 0;
 	int time_right_interval = time_sec();
 	FILE *fp = NULL;
-	temp[MAX_ID - 1] = '/0';
+	temp[MAX_ID - 1] = '\0';
 	if ((fp = fopen("rate.txt", "r+")) == NULL)
 	{
 		printf("File Open Failed.\n");

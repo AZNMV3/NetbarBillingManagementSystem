@@ -11,14 +11,13 @@
 #include<string.h>
 #include"./include/cJSON.h"
 
+#define FILE_NAME "../data/card.json"
+
 struct card {
 	char id[MAX_ID];
 	char passwd[MAX_PASSWD];
 	float balance;
 };
-
-extern void card_add();
-extern void card_del();
 
 extern int card_add_core(char id[], char password[], float balance);
 extern float card_get_json_value(char id[], char password[]);

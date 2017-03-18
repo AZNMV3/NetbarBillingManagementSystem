@@ -1,9 +1,8 @@
 #include "admin.h"
 
-
 int admin_add_core(char user[], char password[], int is_super, int allow_cardman, int allow_billman, int allow_shutman, int allow_chargeman, int allow_statman) {
 	cJSON *root_json = NULL;
-	FILE *fp_1st = fopen("admin.json", "rb+");
+	FILE *fp_1st = fopen(FILE_POSITION, "rb+");
 
 	if (fp_1st != NULL) {
 		if (!feof(fp_1st)) {
@@ -43,7 +42,7 @@ cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(password));		//Ã
 
 	char *buf = cJSON_Print(root_json);						//½«json½á¹¹¸ñÊ½»¯µ½»º³åÇø
 
-	FILE *fp = fopen("admin.json", "wb+");
+	FILE *fp = fopen(FILE_POSITION, "wb+");
 	fwrite(buf, strlen(buf), 1, fp);
 
 	/*	ÔÚÎÄ¼þ½áÎ²Ìí¼ÓÄÚÈÝ
@@ -63,7 +62,7 @@ cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(password));		//Ã
 void admin_get_json_value(char name[], char password[], int *is_super, int *allow_cardman, int *allow_billman, int *allow_shutman, int *allow_chargeman, int *allow_statman) {
 
 	//´ÓÎÄ¼þÖÐ¶ÁÈ¡Òª½âÎöµÄJSONÊý¾Ý
-	FILE *fp = fopen("admin.json", "r");
+	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -167,7 +166,7 @@ int admin_get_permission(char * user, char type) {
 
 int admin_is_passwd_right(char name[],char password[]) {
 
-	FILE *fp = fopen("admin.json", "r");
+	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -204,7 +203,7 @@ void admin_set_password(char name[],char newpasswd[]){
 	* ¶ÔÏóµÄvaluestringºÍstring²»ÄÜÐÞ¸Ä,Ö»ÄÜÖ±½Ó»ñÈ¡,²»ÐèÒªÉ¾³ý
 	* Ö»ÄÜÔÙ´´½¨Ò»´ÎÁË£¬¿Óµù
 	*/
-	FILE *fp = fopen("admin.json", "r");
+	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -223,7 +222,7 @@ void admin_set_password(char name[],char newpasswd[]){
 	cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(newpasswd));
 
 	char *buf = cJSON_Print(root_json);
-	FILE *fp2 = fopen("admin.json", "wb+");
+	FILE *fp2 = fopen(FILE_POSITION, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);
 	free(buf);
 	fclose(fp2);
@@ -232,7 +231,7 @@ void admin_set_password(char name[],char newpasswd[]){
 
 
 void admin_del_core (char name[]) {
-	FILE *fp = fopen("admin.json", "r");
+	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -250,7 +249,7 @@ void admin_del_core (char name[]) {
 	cJSON_DeleteItemFromObject(root_json, name);
 
 	char *buf = cJSON_Print(root_json);
-	FILE *fp2 = fopen("admin.json", "wb+");
+	FILE *fp2 = fopen(FILE_POSITION, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);
 	free(buf);
 	fclose(fp2);
@@ -258,7 +257,7 @@ void admin_del_core (char name[]) {
 }
 
 int admin_has_user(char name[]){
-	FILE *fp = fopen("admin.json", "r");
+	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -282,7 +281,7 @@ int admin_has_user(char name[]){
 void admin_set_permission(char *name, char type, int new_vaule) {
 
 	//´ÓÎÄ¼þÖÐ¶ÁÈ¡Òª½âÎöµÄJSONÊý¾Ý
-	FILE *fp = fopen("admin.json", "r");
+	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -325,7 +324,7 @@ void admin_set_permission(char *name, char type, int new_vaule) {
 	}
 
 	char *buf = cJSON_Print(root_json);
-	fp = fopen("admin.json", "wb+");
+	fp = fopen(FILE_POSITION, "wb+");
 	fwrite(buf, strlen(buf), 1, fp);
 	free(buf);
 	free(data);

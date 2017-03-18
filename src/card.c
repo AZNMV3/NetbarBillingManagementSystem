@@ -1,36 +1,9 @@
 #include "card.h"
 
-void card_add() {
-	char id[MAX_ID];
-	char passwd[MAX_PASSWD];
-	float balance = 0;
-	printf("\n=======添加卡======\n");
-	printf("请输入身份证号或护照号(即卡号)\n");
-	if (!scanf("%s", id)) {
-		fflush(stdin);
-		printf("\n输入非法！退出");
-		return;
-	}
-	printf("\n请输入卡密码\n");
-	if (!scanf("%s", passwd)) {
-		fflush(stdin);
-		printf("\n输入非法！退出");
-		return;
-	}
-
-	printf("\n请输入开卡金额\n");
-	if (!scanf("%f", &balance)) {
-		fflush(stdin);
-		printf("\n输入非法！退出");
-		return;
-	}
-	
-	card_add_core(id, passwd, balance);
-}
 
 int card_add_core(char id[], char passwd[],float balance) {
 	cJSON *root_json = NULL;
-	FILE *fp_1st = fopen("card.json", "rb+");
+	FILE *fp_1st = fopen(FILE_NAME, "rb+");
 
 	if (fp_1st != NULL) {
 		if(!feof(fp_1st)){
@@ -60,7 +33,7 @@ int card_add_core(char id[], char passwd[],float balance) {
 
 	char *buf = cJSON_Print(root_json);						//将json结构格式化到缓冲区
 
-	FILE *fp = fopen("card.json", "wb+");
+	FILE *fp = fopen(FILE_NAME, "wb+");
 	fwrite(buf, strlen(buf), 1, fp);
 
 	free(buf);
@@ -75,7 +48,7 @@ int card_add_core(char id[], char passwd[],float balance) {
 float card_get_json_value(char id[], char password[]) {
 	float balance = 0;
 	//从文件中读取要解析的JSON数据
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -105,7 +78,7 @@ float card_get_json_value(char id[], char password[]) {
 
 int card_is_passwd_right(char id[],char passwd[]) {
 
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -137,7 +110,7 @@ void card_set_password(char id[],char newpasswd[]){
   /**
 	* This is an object. We're in C. We don't have objects. But we do have structs.What's the framerate?
 	*/
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -156,36 +129,16 @@ void card_set_password(char id[],char newpasswd[]){
 	cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(newpasswd));
 
 	char *buf = cJSON_Print(root_json);
-	FILE *fp2 = fopen("card.json", "wb+");
+	FILE *fp2 = fopen(FILE_NAME, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);
 	free(buf);
 	fclose(fp2);
 	cJSON_Delete(root_json);
 }
 
-void card_del() {
-	char id[MAX_ID];
-	char temp[MAX_PASSWD];
-	printf("\n=======删卡退费======\n");
-	printf("请输入要删除的卡号\n");
-	if (!scanf("%s", id)) {
-		fflush(stdin);
-		printf("\n输入非法！退出");
-		return;
-	}
-
-	if (card_has(id)){
-		float balance = card_get_json_value(id, temp);
-		card_del_core(id);
-		printf("\n此用户已被删除\n");
-		printf("\n应退费%f\n",balance);
-	}else{
-		printf("此用户不存在");
-	}
-}
 
 void card_del_core (char id[]) {
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -203,7 +156,7 @@ void card_del_core (char id[]) {
 	cJSON_DeleteItemFromObject(root_json, id);
 
 	char *buf = cJSON_Print(root_json);
-	FILE *fp2 = fopen("card.json", "wb+");
+	FILE *fp2 = fopen(FILE_NAME, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);
 	free(buf);
 	fclose(fp2);
@@ -211,7 +164,7 @@ void card_del_core (char id[]) {
 }
 
 int card_has(char id[]){
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -233,7 +186,7 @@ int card_has(char id[]){
 }
 
 void top_up (char id[],float money){
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -253,7 +206,7 @@ void top_up (char id[],float money){
 	cJSON_GetObjectItem(data_json, "balance")->valuedouble = balance;
 
 	char *buf = cJSON_Print(root_json);
-	FILE *fp2 = fopen("card.json", "wb+");
+	FILE *fp2 = fopen(FILE_NAME, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);
 	free(buf);
 	fclose(fp2);
@@ -261,7 +214,7 @@ void top_up (char id[],float money){
 }
 
 void cost(char id[], float money) {
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
@@ -281,7 +234,7 @@ void cost(char id[], float money) {
 	cJSON_GetObjectItem(data_json, "balance")->valuedouble = balance;
 
 	char *buf = cJSON_Print(root_json);
-	FILE *fp2 = fopen("card.json", "wb+");
+	FILE *fp2 = fopen(FILE_NAME, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);
 	free(buf);
 	fclose(fp2);
@@ -289,7 +242,7 @@ void cost(char id[], float money) {
 }
 
 int	can_card_login(char id[], char passwd[]) {
-	FILE *fp = fopen("card.json", "r");
+	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
