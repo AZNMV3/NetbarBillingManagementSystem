@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 /*
   Copyright (c) 2009 Dave Gamble
 
@@ -20,7 +19,7 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
 */
-
+#pragma warning(disable:4068) //kill Warning C4068 of Visual C++
 /* cJSON */
 /* JSON parser in C. */
 

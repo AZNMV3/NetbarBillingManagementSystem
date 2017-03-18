@@ -1,8 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "card.h"
-
-
 
 void card_add() {
 	char id[MAX_ID];
@@ -104,24 +100,6 @@ float card_get_json_value(char id[], char password[]) {
 
 	free(data);					//一定要！！！
 	return balance;
-}
-
-void card_get_information(void) {
-	float balance = 0;
-	char id[MAX_ID];
-	char passwd[MAX_PASSWD];
-
-	printf("请输入要查询的卡号\n");
-	if (!scanf("%s", id)) {
-		printf("\n输入非法！退出");
-		return;
-	}
-
-	balance =card_get_json_value(id, passwd);
-	printf("\n%s", passwd);
-	printf("\n%f", balance);
-
-	system("pause");
 }
 
 

@@ -8,7 +8,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"cJSON.h"
+#include"./include/cJSON.h"
 
 struct admin {
 	char user[MAX_ID];
@@ -21,8 +21,6 @@ struct admin {
 	int allow_statman;
 };
 
-extern void admin_add();
-extern void admin_del();
 extern void admin_get_information(void);
 extern int admin_get_permission(char * user, char type);
 extern void admin_set_permission(char *name, char type, int new_vaule);

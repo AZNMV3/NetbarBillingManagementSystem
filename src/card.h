@@ -5,10 +5,11 @@
 #define MAX_ID 19
 #define MAX_PASSWD 30
 
+/* Head Files */
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"cJSON.h"
+#include"./include/cJSON.h"
 
 struct card {
 	char id[MAX_ID];
@@ -18,7 +19,6 @@ struct card {
 
 extern void card_add();
 extern void card_del();
-extern void card_get_information(void);
 
 extern int card_add_core(char id[], char password[], float balance);
 extern float card_get_json_value(char id[], char password[]);
