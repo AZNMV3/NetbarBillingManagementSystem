@@ -10,7 +10,7 @@
 #include<string.h>
 #include"./include/cJSON.h"
 
-#define FILE_POSITION "../data/admin.json"
+#define FILE_POSITION "./data/admin.json"
 
 struct admin {
 	char user[MAX_ID];

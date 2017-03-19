@@ -6,18 +6,18 @@ int card_add_core(char id[], char passwd[],float balance) {
 	FILE *fp_1st = fopen(FILE_NAME, "rb+");
 
 	if (fp_1st != NULL) {
-		if(!feof(fp_1st)){
+		/*if(!feof(fp_1st)){
 			root_json = cJSON_CreateObject();
-		}else{
+		  }else{*/
 		fseek(fp_1st, 0, SEEK_END);
 		long len = ftell(fp_1st);
 		fseek(fp_1st, 0, SEEK_SET);
 		char *data = (char*)malloc(len + 1);
 		fread(data, 1, len, fp_1st);
 		fclose(fp_1st);
-		printf("%s", data);
+	//	printf("%s", data);
 		root_json = cJSON_Parse(data);	//解析JSON数据
-		}
+	//	}
 	}else{
 		/*创建新对象*/
 		root_json = cJSON_CreateObject();		//root节点

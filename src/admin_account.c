@@ -5,18 +5,18 @@ int admin_add_core(char user[], char password[], int is_super, int allow_cardman
 	FILE *fp_1st = fopen(FILE_POSITION, "rb+");
 
 	if (fp_1st != NULL) {
-		if (!feof(fp_1st)) {
-			root_json = cJSON_CreateObject();
-		}else{
+		/*if (!feof(fp_1st)) {
+		//	root_json = cJSON_CreateObject();
+		}else{*/
 			fseek(fp_1st, 0, SEEK_END);
 			long len = ftell(fp_1st);
 			fseek(fp_1st, 0, SEEK_SET);
 			char *data = (char*)malloc(len + 1);
 			fread(data, 1, len, fp_1st);
 			fclose(fp_1st);
-			printf("%s", data);
+	//		printf("%s", data);
 			root_json = cJSON_Parse(data);		//解析JSON数据
-		}
+		//}
 	}else{
 		/*创建新对象*/
 		root_json = cJSON_CreateObject();		//root节点
@@ -38,7 +38,7 @@ int admin_add_core(char user[], char password[], int is_super, int allow_cardman
 	cJSON_AddNumberToObject(data_json, "allow_chargeman", allow_chargeman);			//充值退费权限
 	cJSON_AddNumberToObject(data_json, "allow_statman", allow_statman);				//查询统计权限
 	cJSON_AddNumberToObject(data_json, "su", is_super);								//超级用户？
-cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(password));		//密码
+	cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(password));		//密码
 
 	char *buf = cJSON_Print(root_json);						//将json结构格式化到缓冲区
 

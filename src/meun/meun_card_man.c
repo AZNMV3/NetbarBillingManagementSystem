@@ -98,7 +98,7 @@ void card_get_information(void) {
 	line_breaks(1);
 	print_equals(60);
 	line_breaks(1);
-	printf("%s\t\t%s\t\t\t%.2f",id,passwd,balance);
+	printf("%s\t%s\t\t\t%.2f",id,passwd,balance);
 	line_breaks(2);
 	print_equals(80);
 	line_breaks(2);

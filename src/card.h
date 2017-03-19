@@ -11,7 +11,7 @@
 #include<string.h>
 #include"./include/cJSON.h"
 
-#define FILE_NAME "../data/card.json"
+#define FILE_NAME "./data/card.json"
 
 struct card {
 	char id[MAX_ID];
