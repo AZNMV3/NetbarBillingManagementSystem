@@ -1,23 +1,6 @@
 #include"price.h"
 
-#define DEFAULT_PRICE 2.5
 
-
-void price_add(void) {
-	int time_left_interval, time_right_interval;
-	float hour, price;
-	printf("\n请输入价格适用区间\n");
-	printf("\n请输入价格开始区间(单位:小时，可以输入至小数点后两位）\n");
-	scanf("%f", &hour);
-	time_left_interval = (int)(1.0 * hour * 3600);
-	printf("\n请输入价格结束区间(单位:小时，可以输入至小数点后两位）\n");
-	scanf("%f", &hour);
-	time_right_interval = (int)(1.0 * hour * 3600);
-	printf("\n请输入价格(单位:元,可以输入至分）\n");
-	scanf("%f", &price);
-	price_add_core(time_left_interval, time_right_interval, price);
-
-}
 
 void price_del_core(int time_left_interval) {
 	FILE *fp;
@@ -89,18 +72,4 @@ float price_read(int time_sec){
 	return DEFAULT_PRICE;
 }
 
-void price_set(void){
-		int time_left_interval, time_right_interval;
-		float hour, price;
-		printf("\n请输入要修改的价格开始区间(单位:小时，可以输入至小数点后两位）\n");
-		scanf("%f", &hour);
-		time_left_interval = (int)(1.0 * hour * 3600);
-		printf("\n请输入新的价格结束区间(单位:小时，可以输入至小数点后两位）\n");
-		scanf("%f", &hour);
-		time_right_interval = (int)(1.0 * hour * 3600);
-		printf("\n请输入新价格(单位:元,可以输入至分）\n");
-		scanf("%f", &price);
-		price_del_core(time_left_interval);
-		price_add_core(time_left_interval, time_right_interval, price);
-	}
 

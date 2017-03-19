@@ -1,4 +1,5 @@
 #include "../menu.h"
+#include "../price.h"
 
 
 void price_menu(void);
@@ -45,7 +46,18 @@ void price_option(void) {
 }
 
 void price_add_a_billing_standards(void) {
-
+	int time_left_interval, time_right_interval;
+	float hour, price;
+	printf("\n请输入价格适用区间\n");
+	printf("\n请输入价格开始区间(单位:小时，可以输入至小数点后两位）\n");
+	scanf("%f", &hour);
+	time_left_interval = (int)(1.0 * hour * 3600);
+	printf("\n请输入价格结束区间(单位:小时，可以输入至小数点后两位）\n");
+	scanf("%f", &hour);
+	time_right_interval = (int)(1.0 * hour * 3600);
+	printf("\n请输入价格(单位:元,可以输入至分）\n");
+	scanf("%f", &price);
+	price_add_core(time_left_interval, time_right_interval, price);
 }
 
 void price_check_a_billing_standards(void) {
@@ -57,7 +69,18 @@ void price_del_a_billing_standard(void) {
 }
 
 void price_modify_a_billing_standard(void) {
-
+	int time_left_interval, time_right_interval;
+	float hour, price;
+	printf("\n请输入要修改的价格开始区间(单位:小时，可以输入至小数点后两位）\n");
+	scanf("%f", &hour);
+	time_left_interval = (int)(1.0 * hour * 3600);
+	printf("\n请输入新的价格结束区间(单位:小时，可以输入至小数点后两位）\n");
+	scanf("%f", &hour);
+	time_right_interval = (int)(1.0 * hour * 3600);
+	printf("\n请输入新价格(单位:元,可以输入至分）\n");
+	scanf("%f", &price);
+	price_del_core(time_left_interval);
+	price_add_core(time_left_interval, time_right_interval, price);
 }
 
 void menu_price_jump(void) {

@@ -25,7 +25,7 @@ struct admin {
 
 extern void admin_get_information(void);
 extern int admin_get_permission(char * user, char type);
-extern void admin_set_permission(char *name, char type, int new_vaule);
+extern void admin_set_permission(char *name, char type, int new_value);
 
 extern int admin_add_core(char user[], char password[], int is_super, int allow_cardman, int allow_billman, int allow_shutman, int allow_chargeman, int allow_statman);
 extern void admin_get_json_value(char name[], char password[], int *is_super, int *allow_cardman, int *allow_billman, int *allow_shutman, int *allow_chargeman, int *allow_statman);

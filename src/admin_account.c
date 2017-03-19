@@ -278,7 +278,7 @@ int admin_has_user(char name[]){
 	return 0;
 }
 
-void admin_set_permission(char *name, char type, int new_vaule) {
+void admin_set_permission(char *name, char type, int new_value) {
 
 	//从文件中读取要解析的JSON数据
 	FILE *fp = fopen(FILE_POSITION, "r");
@@ -299,28 +299,27 @@ void admin_set_permission(char *name, char type, int new_vaule) {
 
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
 	switch (type) {
-	case 'a':cJSON_GetObjectItem(data_json, "allow_cardman")->valueint = new_vaule;
+	case 'a':cJSON_GetObjectItem(data_json, "allow_cardman")->valueint = new_value;
 		break;
-	case 'b':cJSON_GetObjectItem(data_json, "allow_billman")->valueint = new_vaule;
+	case 'b':cJSON_GetObjectItem(data_json, "allow_billman")->valueint = new_value;
 		break;
-	case 'm':cJSON_GetObjectItem(data_json, "allow_shutman")->valueint = new_vaule;
+	case 'm':cJSON_GetObjectItem(data_json, "allow_shutman")->valueint = new_value;
 		break;
-	case 'c':cJSON_GetObjectItem(data_json, "allow_chargeman")->valueint = new_vaule;
+	case 'c':cJSON_GetObjectItem(data_json, "allow_chargeman")->valueint = new_value;
 		break;
-	case 's':cJSON_GetObjectItem(data_json, "allow_statman")->valueint = new_vaule;
+	case 's':cJSON_GetObjectItem(data_json, "allow_statman")->valueint = new_value;
 		break;
 	case '1': {
 
-		cJSON_GetObjectItem(data_json, "su")->valueint = new_vaule;
-		cJSON_GetObjectItem(data_json, "allow_cardman")->valueint = new_vaule;
-		cJSON_GetObjectItem(data_json, "allow_billman")->valueint = new_vaule;
-		cJSON_GetObjectItem(data_json, "allow_shutman")->valueint = new_vaule;
-		cJSON_GetObjectItem(data_json, "allow_chargeman")->valueint = new_vaule;
-		cJSON_GetObjectItem(data_json, "allow_statman")->valueint = new_vaule;
+		cJSON_GetObjectItem(data_json, "su")->valueint = new_value;
+		cJSON_GetObjectItem(data_json, "allow_cardman")->valueint = new_value;
+		cJSON_GetObjectItem(data_json, "allow_billman")->valueint = new_value;
+		cJSON_GetObjectItem(data_json, "allow_shutman")->valueint = new_value;
+		cJSON_GetObjectItem(data_json, "allow_chargeman")->valueint = new_value;
+		cJSON_GetObjectItem(data_json, "allow_statman")->valueint = new_value;
 	}
 			  break;
 	default:return;
-		break;
 	}
 
 	char *buf = cJSON_Print(root_json);
