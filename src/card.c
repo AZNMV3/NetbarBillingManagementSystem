@@ -232,7 +232,6 @@ void cost(char id[], float money) {
 	float balance = (float)cJSON_GetObjectItem(data_json, "balance")->valuedouble;
 	balance -= money;
 	cJSON_GetObjectItem(data_json, "balance")->valuedouble = balance;
-
 	char *buf = cJSON_Print(root_json);
 	FILE *fp2 = fopen(FILE_NAME, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);

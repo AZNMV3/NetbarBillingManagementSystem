@@ -1,15 +1,12 @@
-﻿#include<stdio.h>
-#include<stdlib.h>
-#include <time.h>
+﻿#include "login.h"
 #include "card.h"
-#include <string.h>
 #include "price.h"
 
 
 void writeLogLine(const char *content)
 {
 	FILE *fp;
-	if ((fp = fopen("login.txt", "a")) == NULL)
+	if ((fp = fopen("./data/login.txt", "a")) == NULL)
 	{
 		printf("Open Failed.\n");
 		return;
@@ -20,7 +17,7 @@ void writeLogLine(const char *content)
 
 void write_login(int time,const char *id){
 	FILE *fp;
-	if ((fp = fopen("login.txt", "a")) == NULL)
+	if ((fp = fopen("./data/login.txt", "a")) == NULL)
 	{
 		printf("Open Failed.\n");
 		return;
@@ -43,7 +40,6 @@ void login_in(void) {
 	scanf("%s", passwd);
 	if(can_card_login(id, passwd)){
 	write_login(time_sec(),id);
-	printf("%d\n", time_sec());
 	}else{
 		printf("卡号或密码错误");
 		getchar();
@@ -52,7 +48,7 @@ void login_in(void) {
 
 void access_out(char id[]){
 	FILE *fp;
-	if ((fp = fopen("login.txt", "a+")) == NULL)
+	if ((fp = fopen("./data/login.txt", "a+")) == NULL)
 	{
 		printf("Open Failed.\n");
 		return;
@@ -66,7 +62,7 @@ int start_time_get(char id[]) {
 	temp[MAX_ID-1] = '\0';
 	int time_left_interval;
 	FILE *fp;
-	if ((fp = fopen("login.txt", "r")) == NULL)
+	if ((fp = fopen("./data/login.txt", "r")) == NULL)
 	{
 		printf("Open Failed.\n");
 		return 0;
@@ -87,19 +83,24 @@ int start_time_get(char id[]) {
 }
 
 
-void shut_log(void){
+void shut_log(char id[],int ago){
 	FILE *fp;
-	if ((fp = fopen("log.txt", "a+")) == NULL){
+	if ((fp = fopen("./data/log.txt", "a+")) == NULL){
 		printf("Open Failed.\n");
 		return;
 	}
 	char *wday[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+
 	time_t now;
-	struct tm *t;
+	struct tm *start,*stop;
 	time(&now);
-	t = localtime(&now);
-	fprintf(fp,"%d年%d月%d日 ", (1900 + t->tm_year),(1 + t->tm_mon), t->tm_mday);
-	fprintf(fp,"%s    %d:%d:%.2d\n", wday[t->tm_wday], t->tm_hour, t->tm_min, t->tm_sec);
+
+	stop = localtime(&now);
+	fprintf(fp, "%s\t", id);
+	//fprintf(fp, "%d年%d月%d日 ", (1900 + start->tm_year), (1 + start->tm_mon), start->tm_mday);
+	//fprintf(fp, "%s    %d:%d:%.2d\t", wday[start->tm_wday], start->tm_hour, start->tm_min, start->tm_sec);
+	fprintf(fp,"%d年%d月%d日 ", (1900 + stop->tm_year),(1 + stop->tm_mon), stop->tm_mday);
+	fprintf(fp,"%s    %d:%d:%.2d\n", wday[stop->tm_wday], stop->tm_hour, stop->tm_min, stop->tm_sec);
 	//fclose(fp);
 }
 
@@ -110,7 +111,7 @@ void shut_core(char id[]) {
 	int time_right_interval = time_sec();
 	FILE *fp = NULL;
 	temp[MAX_ID - 1] = '\0';
-	if ((fp = fopen("rate.txt", "r+")) == NULL)
+	if ((fp = fopen("./data/login.txt", "r+")) == NULL)
 	{
 		printf("File Open Failed.\n");
 		return ;
@@ -127,16 +128,45 @@ void shut_core(char id[]) {
 		if (feof(fp))
 			break;
 	}
+	printf("\n%d",time_left_interval);
 	if(!time_left_interval)
 		return;
 	time = time_right_interval - time_left_interval;
-	double price= price_read(time)*(time/3600.00);
-
+	double cost_money= price_read(time)*(time/3600.00);
+	cost(id, cost_money);
+	del_after(id);
+	//shut_log(id, time_left_interval);
 }
 
+void del_after(char id[]) {
+		FILE *fp;
+		char s[200] = "";			//用于保存
+		char temp[MAX_ID];
+		temp[MAX_ID - 1] = '\0';
 
-/*
-int main(void) {
-	login_in();
-	return 0;
-}*/
+		if ((fp = fopen("./data/login.txt", "r")) == NULL) {
+			printf("Can't Open File!");
+			return;
+		}
+
+		fseek(fp, 0, SEEK_END);
+		long len = ftell(fp);
+		char *data = (char*)malloc(sizeof(char)*len + 1);
+		*data = 0;
+		fseek(fp, 0, SEEK_SET);
+
+		while (ftell(fp) < len - 3) {
+			fgets(s, 150, fp);
+			sscanf(s, "%s%d", temp);
+			if (!strcmp(temp,id)) {
+				strcat(data, "\n");
+				continue;
+			}
+			strcat(data, s);			//保存读取到的信息 */
+		}
+		fclose(fp);
+		fp = fopen("./data/login.txt", "wb+");		//重新以写的方式打开文件 
+		fputs(data, fp);					//把内存信息存储到文件中 
+		fclose(fp);
+		fflush(stdin);
+}
