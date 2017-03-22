@@ -6,3 +6,5 @@
 	
 	A charging rate system of the netbar.
 	It's a curriculum design (Homework).
+	
+	Test Account: admin admin
