@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define DEFAULT_PRICE 2.5
 
@@ -13,4 +14,7 @@ extern void price_add_core(int time_left_interval, int time_right_interval, floa
 extern float price_read(int time_sec);
 extern void price_del_core(int time_left_interval);
 
+extern void statistics_print_out_an_user(char id[]);
+extern float statistics_between(int time_left_year, int time_left_month, int time_left_day, int time_right_year, int time_right_month, int time_right_day);
+extern bool statistics_month_core(void);
 #endif

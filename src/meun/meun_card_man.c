@@ -46,14 +46,14 @@ void card_man_add(void) {
 		printf("\n输入非法！退出");
 		return;
 	}
-	printf("\n请输入卡密码\n");
+	puts("\n请输入卡密码");
 	if (!scanf("%s", passwd)) {
 		fflush(stdin);
 		printf("\n输入非法！退出");
 		return;
 	}
 
-	printf("\n请输入开卡金额\n");
+	puts("\n请输入开卡金额");
 	if (!scanf("%f", &balance)) {
 		fflush(stdin);
 		printf("\n输入非法！退出");
@@ -73,7 +73,7 @@ void card_get_information(void) {
 	char id[MAX_ID];
 	char passwd[MAX_PASSWD];
 
-	printf("请输入要查询的卡号\n");
+	puts("请输入要查询的卡号\n");
 	if (!scanf("%s", id)) {
 		printf("\n输入非法！退出");
 		return;
@@ -113,7 +113,7 @@ void card_man_del(void) {
 	char id[MAX_ID];
 	char temp[MAX_PASSWD];
 	printf("\n=======删卡退费======\n");
-	printf("请输入要删除的卡号\n");
+	puts("请输入要删除的卡号\n");
 	if (!scanf("%s", id)) {
 		fflush(stdin);
 		printf("\n输入非法！退出");

@@ -58,14 +58,31 @@ void price_add_a_billing_standards(void) {
 	printf("\n请输入价格(单位:元,可以输入至分）\n");
 	scanf("%f", &price);
 	price_add_core(time_left_interval, time_right_interval, price);
+	line_breaks(2);
+	system("pause");
+	price_menu();
 }
 
 void price_check_a_billing_standards(void) {
 
+
+
+
+
+	line_breaks(2);
+	system("pause");
+	price_menu();
 }
 
 void price_del_a_billing_standard(void) {
-
+	float hour;
+	printf("\n请输入要删除价格的价格开始区间(单位:小时，可以输入至小数点后两位）\n");
+	scanf("%f", &hour);
+	int time_left_interval = (int)(1.0 * hour * 3600);;
+	price_del_core(time_left_interval);
+	line_breaks(2);
+	system("pause");
+	price_menu();
 }
 
 void price_modify_a_billing_standard(void) {
@@ -81,6 +98,9 @@ void price_modify_a_billing_standard(void) {
 	scanf("%f", &price);
 	price_del_core(time_left_interval);
 	price_add_core(time_left_interval, time_right_interval, price);
+	line_breaks(2);
+	system("pause");
+	price_menu();
 }
 
 void menu_price_jump(void) {
