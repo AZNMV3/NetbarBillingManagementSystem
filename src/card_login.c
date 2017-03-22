@@ -90,18 +90,18 @@ void shut_log(char id[],int ago){
 		return;
 	}
 	char *wday[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-
+	long long a = ago;
 	time_t now;
 	struct tm *start,*stop;
 	time(&now);
-
+	start = localtime(&a);
 	stop = localtime(&now);
 	fprintf(fp, "%s\t", id);
-	//fprintf(fp, "%d年%d月%d日 ", (1900 + start->tm_year), (1 + start->tm_mon), start->tm_mday);
-	//fprintf(fp, "%s    %d:%d:%.2d\t", wday[start->tm_wday], start->tm_hour, start->tm_min, start->tm_sec);
+	fprintf(fp, "%d年%d月%d日 ", (1900 + start->tm_year), (1 + start->tm_mon), start->tm_mday);
+	fprintf(fp, "%s    %d:%d:%.2d\t", wday[start->tm_wday], start->tm_hour, start->tm_min, start->tm_sec);
 	fprintf(fp,"%d年%d月%d日 ", (1900 + stop->tm_year),(1 + stop->tm_mon), stop->tm_mday);
 	fprintf(fp,"%s    %d:%d:%.2d\n", wday[stop->tm_wday], stop->tm_hour, stop->tm_min, stop->tm_sec);
-	//fclose(fp);
+	fclose(fp);
 }
 
 void shut_core(char id[]) {
@@ -135,7 +135,7 @@ void shut_core(char id[]) {
 	double cost_money= price_read(time)*(time/3600.00);
 	cost(id, cost_money);
 	del_after(id);
-	//shut_log(id, time_left_interval);
+	shut_log(id, time_left_interval);
 }
 
 void del_after(char id[]) {

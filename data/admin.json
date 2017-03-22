@@ -18,5 +18,15 @@
 		"allow_statman":	1,
 		"su":	1,
 		"userpass":	"125412"
+	},
+	"admin":	{
+		"username":	"admin",
+		"allow_cardman":	1,
+		"allow_billman":	1,
+		"allow_shutman":	1,
+		"allow_chargeman":	1,
+		"allow_statman":	1,
+		"su":	0,
+		"userpass":	"admin"
 	}
 }
