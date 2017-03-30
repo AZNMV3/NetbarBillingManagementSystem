@@ -27,7 +27,7 @@ int card_add_core(char id[], char passwd[],float balance) {
 
 	cJSON_AddItemToObject(root_json, id, data_json);						//使data节点从属于root节点，并将data节点命名为卡号
 
-	cJSON_AddItemToObject(data_json, "id", cJSON_CreateString(id));			//卡号
+	cJSON_AddItemToObject(data_json, "id", cJSON_CreateString(id));		//卡号
 	cJSON_AddNumberToObject(data_json, "balance", balance);				//余额
 	cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(passwd));		//密码
 

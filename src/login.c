@@ -1,9 +1,8 @@
 #include "login.h"
-#include "card.h"
 #include "admin.h"
-#include <conio.h>
-#include <windows.h>
 
+unsigned char now_login_admin[MAX_USER_LEN];
+struct admin now_admin;
 HANDLE hout;
 
 char* win_getpass(const char* prompt){
@@ -19,43 +18,55 @@ char* win_getpass(const char* prompt){
 	GetConsoleScreenBufferInfo(hout, &csbi);
 	start.X = csbi.dwCursorPosition.X; 
 	start.Y = csbi.dwCursorPosition.Y;
-
+	
 	for(i = 0;i <= MAX_PASSWD;i++){
 		tmp=_getch();
 		if(tmp == 13){					//13='CR' which means 回车(Carriage Return)
 			buf[i] = '\0';
 			break;
-		}else if(tmp == 8) {
-			if(i > 0){
+		}
+		if(tmp == 8) {
+			if (i > 0)
+				i -= 2;
+			if (i == 0)
 				i--;
-				hout = GetStdHandle(STD_OUTPUT_HANDLE);
-				GetConsoleScreenBufferInfo(hout, &csbi);
-				coord.X = csbi.dwCursorPosition.X; //得到现在坐标X的值
-				coord.Y = csbi.dwCursorPosition.Y;
-				if(coord.X-1 >= start.X){
-					coord.X--;
-					SetConsoleCursorPosition(hout, coord);
-				}
-				continue;
-			}else
-				continue;
+			hout = GetStdHandle(STD_OUTPUT_HANDLE);
+			GetConsoleScreenBufferInfo(hout, &csbi);
+			coord.X = csbi.dwCursorPosition.X; //得到现在坐标X的值
+			coord.Y = csbi.dwCursorPosition.Y;
+			if(coord.X-1 >= start.X){
+				coord.X--;
+				SetConsoleCursorPosition(hout, coord);
+			}
+		continue;
 		}
 		buf[i] = tmp;
 		putchar(' ');
 	}
+	puts(buf);
 	putchar('\n');
 	return buf;
 }
 
 int admin_login(void){
-	char username[MAX_ID];
+	system("color 2E");
+	unsigned char username[MAX_USER_LEN];
 	char *password;
-	printf("请输入用户名:");
+	printf("\n\n\n\n\n\n");
+	printf("\t\t\t\t\t");
+	printf("管理用户:");
 	scanf("%s",username);
-	password = win_getpass("请输入密码:");
+	printf("\n");
+	password = win_getpass("\t\t\t\t\t账户密码:");
 	if (admin_has_user(username))
-		if(admin_is_passwd_right(username,password))
+		if(admin_is_passwd_right(username,password)){
+			strcpy(now_login_admin, username);
+			now_login_admin_permissions(now_login_admin);
 			return 1;
-
+		}
 	return 0;
+}
+
+void now_login_admin_permissions(char user[]) {
+	now_admin=write_permissions(user);
 }

@@ -1,5 +1,6 @@
 #include "admin.h"
 
+extern unsigned char now_login_admin[MAX_USER_LEN];
 int admin_add_core(char user[], char password[], int is_super, int allow_cardman, int allow_billman, int allow_shutman, int allow_chargeman, int allow_statman) {
 	cJSON *root_json = NULL;
 	FILE *fp_1st = fopen(FILE_POSITION, "rb+");
@@ -112,7 +113,7 @@ void admin_get_json_value(char name[], char password[], int *is_super, int *allo
 
 void admin_get_information(void) {
 
-	char user[MAX_ID];
+	char user[MAX_USER_LEN];
 	char passwd[MAX_PASSWD];
 
 	int is_super = 0, allow_cardman = 0, allow_billman = 0, allow_shutman = 0, allow_chargeman = 0, allow_statman = 0;
@@ -329,4 +330,11 @@ void admin_set_permission(char *name, char type, int new_value) {
 	free(data);
 	fclose(fp);
 	cJSON_Delete(root_json);
+}
+
+struct admin write_permissions(char user[]) {
+	struct admin result;
+	char passwd[MAX_PASSWD];
+	admin_get_json_value(user, result.password, &(result.is_super), &(result.allow_cardman), &(result.allow_billman), &(result.allow_shutman), &(result.allow_chargeman), &(result.allow_statman));
+	return result;
 }

@@ -2,7 +2,7 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 
-#define MAX_ID 12
+#define MAX_USER_LEN 12
 #define MAX_PASSWD 30
 
 #include<stdio.h>
@@ -13,7 +13,7 @@
 #define FILE_POSITION "./data/admin.json"
 
 struct admin {
-	char user[MAX_ID];
+	unsigned char user[MAX_USER_LEN];
 	char password[MAX_PASSWD];
 	int is_super;
 	int allow_cardman;
@@ -33,6 +33,6 @@ extern void admin_del_core(char name[]);
 extern int admin_has_user(char name[]);
 extern int admin_is_passwd_right(char name[], char password[]);
 extern void admin_set_password(char name[], char newpasswd[]);
-
+struct admin write_permissions(char user[]);
 
 #endif

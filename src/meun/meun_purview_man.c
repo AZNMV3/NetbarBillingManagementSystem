@@ -37,7 +37,7 @@ void purview_man_add_admin(void) {
 	system("cls");
 	print_equals(80);
 	line_breaks(1);
-	char user[MAX_ID];
+	char user[MAX_USER_LEN];
 	char passwd[MAX_PASSWD];
 	char temp = 0;
 	printf("\n=======添加管理员======\n");
@@ -95,7 +95,7 @@ void purview_man_del_admin(void) {
 	system("cls");
 	print_equals(80);
 	line_breaks(1);
-	char user[MAX_ID];
+	char user[MAX_USER_LEN];
 	//	char su_passwd[MAX_PASSWD];
 	printf("\n=======删除管理员======\n");
 	printf("请输入要删除的管理员的用户名\n");
@@ -125,7 +125,7 @@ void purview_man_configure_permissions(void) {
 	system("cls");
 	print_equals(80);
 	line_breaks(1);
-	char user[MAX_ID];
+	char user[MAX_USER_LEN];
 	printf("\n=======修改管理员权限======\n");
 	printf("请输入要修改权限的管理员的用户名\n");
 	if (!scanf("%s", user)) {

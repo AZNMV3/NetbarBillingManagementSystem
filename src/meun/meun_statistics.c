@@ -43,7 +43,10 @@ void statistics_option(void) {
 }
 
 void statistics_transactions(void) {
-
+	FILE *fp = fopen("./data/log.txt", "r");
+	int c;
+	while ((c = fgetc(fp)) != EOF) putchar(c);
+	fclose(fp);
 }
 
 void statistics_total_turnover(void) {

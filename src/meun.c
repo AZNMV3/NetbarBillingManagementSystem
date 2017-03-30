@@ -28,6 +28,24 @@ void menu_wrong_prompt(void) {
 	system("cls");
 }
 
+void menu_no_permission_prompt(void) {
+	//	system("cls");
+	system("color 4F");
+	line_breaks(1);
+	print_equals(80);
+	line_breaks(1);
+	puts_center("错误！");
+	line_breaks(1);
+	puts_center("未知地带");
+	puts_center(" 您无此权限!");
+	line_breaks(1);
+	line_breaks(1);
+	print_equals(80);
+	_getch();
+	fflush(stdin);
+	system("cls");
+}
+
 void puts_center(const char* txt)
 {
 	int len, col;

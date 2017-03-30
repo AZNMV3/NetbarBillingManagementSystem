@@ -5,9 +5,9 @@
 /* Head Files */
 #include <stdio.h> 
 #include <stdlib.h>
-#include <windows.h> 
 #include <tchar.h> 
 #include <conio.h> 
+
 
 /*
 const WORD FORE_BLUE = FOREGROUND_BLUE;           //蓝色文本属性  
@@ -26,6 +26,7 @@ extern void line_breaks(int num);
 extern void prompt_input(void);
 extern void menu_wrong_prompt(void);
 extern void menu_index_jump(void);
+extern void menu_no_permission_prompt(void);
 
 /* menu主函数 */
 extern void index_menu(void);
@@ -58,4 +59,32 @@ extern void menu_purview_man_jump(void);
 extern void purview_man_add_admin(void);					//菜单——添加管理员
 extern void purview_man_del_admin(void);					//菜单——删除管理员
 extern void purview_man_configure_permissions(void);		//菜单——配置权限
+
+/* meun_on_and_shut.c */
+void on_and_shut_menu(void);
+void on_and_shut_option(void);
+void on_and_shut_head(void);
+void on_and_shut_content(void);
+void menu_on_and_shut_jump(void);
+
+void on_and_shut_power_on(void);				//菜单——上机
+void on_and_shut_power_off(void);				//菜单——下机
+
+/* meun_balance.c */
+void balance_man_menu(void);
+void balance_man_option(void);
+void balance_man_head(void);
+void balance_man_content(void);
+void menu_balance_jump(void);
+
+void balance_man_top_up(void);				//菜单——充值
+void balance_man_withdraw(void);			//菜单——提现
+
+/* meun_index.c */
+void index_menu(void);
+void index_option(void);
+void index_head(void);
+void index_content(void);
+void menu_index_jump(void);
+
 #endif

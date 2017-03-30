@@ -113,7 +113,7 @@ void card_man_del(void) {
 	char id[MAX_ID];
 	char temp[MAX_PASSWD];
 	printf("\n=======删卡退费======\n");
-	printf("请输入要删除的卡号\n");
+	puts("请输入要删除的卡号\n");
 	if (!scanf("%s", id)) {
 		fflush(stdin);
 		printf("\n输入非法！退出");
