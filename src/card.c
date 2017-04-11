@@ -25,7 +25,7 @@ int card_add_core(char id[], char passwd[],float balance) {
 
 	cJSON *data_json = cJSON_CreateObject();		//卡信息节点
 
-	cJSON_AddItemToObject(root_json, id, data_json);						//使data节点从属于root节点，并将data节点命名为卡号
+	cJSON_AddItemToObject(root_json, id, data_json);					//使data节点从属于root节点，并将data节点命名为卡号
 
 	cJSON_AddItemToObject(data_json, "id", cJSON_CreateString(id));		//卡号
 	cJSON_AddNumberToObject(data_json, "balance", balance);				//余额
@@ -42,7 +42,6 @@ int card_add_core(char id[], char passwd[],float balance) {
 	//释放json结构所占用的内存
 	cJSON_Delete(root_json);
 	return 0;
-
 }
 
 float card_get_json_value(char id[], char password[]) {
@@ -76,7 +75,7 @@ float card_get_json_value(char id[], char password[]) {
 }
 
 
-int card_is_passwd_right(char id[],char passwd[]) {
+bool card_is_passwd_right(char id[],char passwd[]) {
 
 	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
@@ -100,10 +99,9 @@ int card_is_passwd_right(char id[],char passwd[]) {
 	free(data);					//一定要！！！
 
 	if (!result)
-		return 1;
-	else
-		return 0;
-	return 0;
+		return true;
+
+	return false;
 }
 
 void card_set_password(char id[],char newpasswd[]){
@@ -163,7 +161,7 @@ void card_del_core (char id[]) {
 	cJSON_Delete(root_json);
 }
 
-int card_has(char id[]){
+bool card_has(char id[]){
 	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -177,12 +175,12 @@ int card_has(char id[]){
 	{
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
-		return 0;
+		return false;
 	}
 	if (cJSON_HasObjectItem(root_json, id))
-		return 1;
+		return true;
 
-	return 0;
+	return false;
 }
 
 void top_up (char id[],float money){
@@ -240,7 +238,7 @@ void cost(char id[], float money) {
 	cJSON_Delete(root_json);
 }
 
-int	can_card_login(char id[], char passwd[]) {
+bool can_card_login(char id[], char passwd[]) {
 	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -263,10 +261,8 @@ int	can_card_login(char id[], char passwd[]) {
 	free(data);					//一定要！！！
 
 	if (!result)
-		if (balance >= 0.40)
-			return 1;
-		else
-			return 0;
+		if (balance >= MIN_CAN_LOGIN_BALANCE)
+			return true;
 
-	return 0;
+	return false;
 }

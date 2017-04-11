@@ -9,6 +9,7 @@
 #include <time.h>
 #include <windows.h>
 #include <conio.h>
+#include <stdbool.h>
 
 /*CARD_LOGIN*/
 extern void write_login(int time, const char *id);
@@ -20,7 +21,7 @@ extern int time_sec(void);
 extern void shut_log(char id[], int ago, float cost_money);
 
 /*ADMIN_LOGIN*/
-extern int admin_login(void);
+extern bool admin_login(void);
 extern char* win_getpass(const char* prompt);
 void now_login_admin_permissions(char user[]);
 

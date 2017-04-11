@@ -1,6 +1,7 @@
 #include "login.h"
 #include "admin.h"
 
+
 unsigned char now_login_admin[MAX_USER_LEN];
 struct admin now_admin;
 HANDLE hout;
@@ -24,8 +25,7 @@ char* win_getpass(const char* prompt){
 		if(tmp == 13){					//13='CR' which means »Ø³µ(Carriage Return)
 			buf[i] = '\0';
 			break;
-		}
-		if(tmp == 8) {
+		}else if(tmp == 8) {
 			if (i > 0)
 				i -= 2;
 			if (i == 0)
@@ -48,7 +48,7 @@ char* win_getpass(const char* prompt){
 	return buf;
 }
 
-int admin_login(void){
+bool admin_login(void){
 	system("color 2E");
 	unsigned char username[MAX_USER_LEN];
 	char *password;
@@ -62,9 +62,9 @@ int admin_login(void){
 		if(admin_is_passwd_right(username,password)){
 			strcpy(now_login_admin, username);
 			now_login_admin_permissions(now_login_admin);
-			return 1;
+			return true;
 		}
-	return 0;
+	return false;
 }
 
 void now_login_admin_permissions(char user[]) {

@@ -3,7 +3,7 @@
 
 extern unsigned char now_login_admin[MAX_USER_LEN];
 extern struct admin now_admin;
-int can_user_enter(char type);
+
 void index_menu(void) {
 	system("cls");
 	system("color 3f");
@@ -42,7 +42,6 @@ void menu_index_jump(void) {
 	fflush(stdin);
 	switch (input) {
 	case '0':exit(0);
-		break;
 	case '1':if(can_user_enter('a'))
 				card_man_menu();
 			else
@@ -78,31 +77,26 @@ void menu_index_jump(void) {
 	}
 }
 
-int can_user_enter(char type){
+bool can_user_enter(char type){
 	switch (type) {
 	case 'a':if (now_admin.allow_cardman == 1) 
-		return 1;
+		return true;
 			 break;
 	case 'b':if (now_admin.allow_billman == 1) 
-		return 1;
-	
+		return true;
 			 break;
 	case 'm':if (now_admin.allow_shutman == 1) 
-		return 1;
-	
+		return true;
 			 break;
 	case 'c':if (now_admin.allow_chargeman == 1) 
-		return 1;
-	
+		return true;
 			 break;
 	case 's':if (now_admin.allow_statman == 1) 
-		return 1;
-	
+		return true;
 			 break;
 	default:if (now_admin.is_super == 1) 
-		return 1;
-	
+		return true;
 			break;
 	}
-	return 0;
+	return false;
 }

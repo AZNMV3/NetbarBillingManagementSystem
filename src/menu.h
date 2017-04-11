@@ -8,6 +8,7 @@
 #include <tchar.h> 
 #include <conio.h> 
 #include <time.h> 
+#include <stdbool.h>
 
 /*
 const WORD FORE_BLUE = FOREGROUND_BLUE;           //蓝色文本属性  
@@ -94,5 +95,5 @@ void index_option(void);
 void index_head(void);
 void index_content(void);
 void menu_index_jump(void);
-
+bool can_user_enter(char type);
 #endif

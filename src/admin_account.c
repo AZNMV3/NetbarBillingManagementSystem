@@ -6,18 +6,18 @@ int admin_add_core(char user[], char password[], int is_super, int allow_cardman
 	FILE *fp_1st = fopen(FILE_POSITION, "rb+");
 
 	if (fp_1st != NULL) {
-		/*if (!feof(fp_1st)) {
-		//	root_json = cJSON_CreateObject();
-		}else{*/
-			fseek(fp_1st, 0, SEEK_END);
-			long len = ftell(fp_1st);
-			fseek(fp_1st, 0, SEEK_SET);
-			char *data = (char*)malloc(len + 1);
-			fread(data, 1, len, fp_1st);
-			fclose(fp_1st);
-	//		printf("%s", data);
-			root_json = cJSON_Parse(data);		//解析JSON数据
-		//}
+//		if (!feof(fp_1st)) {
+//			root_json = cJSON_CreateObject();
+//		}else{
+		fseek(fp_1st, 0, SEEK_END);
+		long len = ftell(fp_1st);
+		fseek(fp_1st, 0, SEEK_SET);
+		char *data = (char*)malloc(len + 1);
+		fread(data, 1, len, fp_1st);
+		fclose(fp_1st);
+//		printf("%s", data);
+		root_json = cJSON_Parse(data);		//解析JSON数据
+//	}
 	}else{
 		/*创建新对象*/
 		root_json = cJSON_CreateObject();		//root节点
@@ -57,7 +57,6 @@ int admin_add_core(char user[], char password[], int is_super, int allow_cardman
 	//释放json结构所占用的内存
 	cJSON_Delete(root_json);
 	return 0;
-
 }
 
 void admin_get_json_value(char name[], char password[], int *is_super, int *allow_cardman, int *allow_billman, int *allow_shutman, int *allow_chargeman, int *allow_statman) {
@@ -80,7 +79,6 @@ void admin_get_json_value(char name[], char password[], int *is_super, int *allo
 		cJSON_Delete(root_json);
 		return;
 	}
-
 
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
 
@@ -131,41 +129,41 @@ void admin_get_information(void) {
 	system("pause");
 }
 
-int admin_get_permission(char * user, char type) {
+bool admin_get_permission(char * user, char type) {
 	char passwd[MAX_PASSWD];
 	int is_super = 0, allow_cardman = 0, allow_billman = 0, allow_shutman = 0, allow_chargeman = 0, allow_statman = 0;
 	admin_get_json_value(user, passwd, &is_super, &allow_cardman, &allow_billman, &allow_shutman, &allow_chargeman, &allow_statman);
 	free(passwd);
-	switch (type){
-		case 'a':if (allow_cardman == 1) {
-			return 1;
-		};
-			break;
-		case 'b':if (allow_billman == 1) {
-			return 1;
-		};
-			break;
-		case 'm':if (allow_shutman == 1) {
-			return 1;
-		};
-			break;
-		case 'c':if (allow_chargeman == 1) {
-			return 1;
-		};
-			break;
-		case 's':if (allow_statman == 1) {
-			return 1;
-		};
-			break;
-		default:if (is_super == 1) {
-			return 1;
-		};
+	switch (type) {
+	case 'a':if (allow_cardman == 1) {
+		return true;
+	};
+			 break;
+	case 'b':if (allow_billman == 1) {
+		return true;
+	};
+			 break;
+	case 'm':if (allow_shutman == 1) {
+		return true;
+	};
+			 break;
+	case 'c':if (allow_chargeman == 1) {
+		return true;
+	};
+			 break;
+	case 's':if (allow_statman == 1) {
+		return true;
+	};
+			 break;
+	default:if (is_super == 1) {
+		return true;
+	};
 			break;
 	}
-	return 0;
+	return false;
 }
 
-int admin_is_passwd_right(char name[],char password[]) {
+bool admin_is_passwd_right(char name[], char password[]) {
 
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
@@ -175,35 +173,33 @@ int admin_is_passwd_right(char name[],char password[]) {
 	fread(data, 1, len, fp);
 	fclose(fp);
 
-	cJSON *root_json = cJSON_Parse(data);   
-	if (NULL == root_json)
-	{
+	cJSON *root_json = cJSON_Parse(data);
+	if (NULL == root_json) {
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
-		return 0;
+		return false;
 	}
 
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
 	int result = strcoll(password, cJSON_GetObjectItem(data_json, "userpass")->valuestring);
-	
+
 	free(data);					//一定要！！！
 
 	if (!result)
-		return 1;
+		return true;
 	else
-		return 0;
+		return false;
 
-	return 0;
 }
 
-void admin_set_password(char name[],char newpasswd[]){
-   /*
-	* 修改某个子对象的stringvalue值，恐怕不能直接像修改整数的值这样
-	* 字符串长度会有变化的，而该对象的内存已经事先分配好了
-	* This is an object. We're in C. We don't have objects. But we do have structs.What's the framerate?
-	* 对象的valuestring和string不能修改,只能直接获取,不需要删除
-	* 只能再创建一次了，坑爹
-	*/
+void admin_set_password(char name[], char newpasswd[]) {
+	/*
+	 * 修改某个子对象的stringvalue值，恐怕不能直接像修改整数的值这样
+	 * 字符串长度会有变化的，而该对象的内存已经事先分配好了
+	 * This is an object. We're in C. We don't have objects. But we do have structs.What's the framerate?
+	 * 对象的valuestring和string不能修改,只能直接获取,不需要删除
+	 * 只能再创建一次了，坑爹
+	 */
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -219,7 +215,7 @@ void admin_set_password(char name[],char newpasswd[]){
 		return;
 	}
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
-	cJSON_DeleteItemFromObject(data_json,"userpass");
+	cJSON_DeleteItemFromObject(data_json, "userpass");
 	cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(newpasswd));
 
 	char *buf = cJSON_Print(root_json);
@@ -231,7 +227,7 @@ void admin_set_password(char name[],char newpasswd[]){
 }
 
 
-void admin_del_core (char name[]) {
+void admin_del_core(char name[]) {
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -257,7 +253,7 @@ void admin_del_core (char name[]) {
 	cJSON_Delete(root_json);
 }
 
-int admin_has_user(char name[]){
+bool admin_has_user(char name[]) {
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -271,17 +267,17 @@ int admin_has_user(char name[]){
 	{
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
-		return 0;
+		return false;
 	}
 	if (cJSON_HasObjectItem(root_json, name))
-		return 1;
+		return true;
 
-	return 0;
+	return false;
 }
 
 void admin_set_permission(char *name, char type, int new_value) {
 
-	//从文件中读取要解析的JSON数据
+	/* 从文件中读取要解析的JSON数据 */
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -311,7 +307,6 @@ void admin_set_permission(char *name, char type, int new_value) {
 	case 's':cJSON_GetObjectItem(data_json, "allow_statman")->valueint = new_value;
 		break;
 	case '1': {
-
 		cJSON_GetObjectItem(data_json, "su")->valueint = new_value;
 		cJSON_GetObjectItem(data_json, "allow_cardman")->valueint = new_value;
 		cJSON_GetObjectItem(data_json, "allow_billman")->valueint = new_value;
@@ -334,7 +329,6 @@ void admin_set_permission(char *name, char type, int new_value) {
 
 struct admin write_permissions(char user[]) {
 	struct admin result;
-	char passwd[MAX_PASSWD];
 	admin_get_json_value(user, result.password, &(result.is_super), &(result.allow_cardman), &(result.allow_billman), &(result.allow_shutman), &(result.allow_chargeman), &(result.allow_statman));
 	return result;
 }
