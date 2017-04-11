@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <tchar.h> 
 #include <conio.h> 
-
+#include <time.h> 
 
 /*
 const WORD FORE_BLUE = FOREGROUND_BLUE;           //蓝色文本属性  
@@ -18,6 +18,14 @@ const WORD FORE_RED = FOREGROUND_RED;            //红色文本属性
 //const WORD FORE_YELLOW = FORE_RED | FORE_GREEN;     //黄色文本属性  
 const WORD FORE_GRAY = FOREGROUND_INTENSITY;      //灰色文本属性 
 */
+
+/* Time */
+#if defined(WIN32)
+# define  TIMEB    _timeb
+# define  ftime    _ftime
+#else
+#define TIMEB timeb
+#endif
 
 /* 功能函数 */
 extern void puts_center(const char* txt);
