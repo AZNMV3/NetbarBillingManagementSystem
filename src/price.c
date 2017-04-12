@@ -1,11 +1,11 @@
 #include"price.h"
 
 
-void price_del_core(int time_left_interval) {
+void price_del_core(int time_left_interval){
 	FILE *fp;
 
 	char s[150] = "";			//用于保存
-	int n = 0;				//保存左区间秒数 
+	int n;				//保存左区间秒数 
 
 	if ((fp = fopen(RATE_FILE_POSITION, "r")) == NULL){
 		printf("Can't Open File!");
@@ -20,10 +20,10 @@ void price_del_core(int time_left_interval) {
 
 	/* atoi (ascii to integer) 是把字符串转换成整型数的一个函数*/
 
-	while (ftell(fp) < len - 3) {
+	while (ftell(fp) < len - 3){
 		fgets(s, 100, fp);
 		n = atoi(s);					//从读取的信息取得左区间秒数
-		if (n == time_left_interval) {
+		if (n == time_left_interval){
 			strcat(data, "\n");
 			continue;
 		}
@@ -35,9 +35,9 @@ void price_del_core(int time_left_interval) {
 	fclose(fp);
 }
 
-void price_add_core(int time_left_interval, int time_right_interval, float price) {
+void price_add_core(int time_left_interval, int time_right_interval, float price){
 	FILE *fp = NULL;
-	if ((fp = fopen(RATE_FILE_POSITION, "a+")) == NULL) {
+	if ((fp = fopen(RATE_FILE_POSITION, "a+")) == NULL){
 		printf("Can't Open File!");
 		return;
 	}
@@ -46,7 +46,7 @@ void price_add_core(int time_left_interval, int time_right_interval, float price
 	fclose(fp);
 }
 
-float price_read(int time_sec) {
+float price_read(int time_sec){
 	float price = 2.5;
 	int time_left_interval, time_right_interval;
 	FILE *fp = NULL;
@@ -54,7 +54,7 @@ float price_read(int time_sec) {
 		printf("File Open Failed.\n");
 		return DEFAULT_PRICE;
 	}
-	while (1) {
+	while (1){
 		if (feof(fp))
 			break;
 		fscanf(fp, "%f%d%d", &price, &time_left_interval, &time_right_interval);

@@ -1,12 +1,12 @@
 #include "admin.h"
 
 extern unsigned char now_login_admin[MAX_USER_LEN];
-int admin_add_core(char user[], char password[], int is_super, int allow_cardman, int allow_billman, int allow_shutman, int allow_chargeman, int allow_statman) {
+int admin_add_core(char user[], char password[], int is_super, int allow_cardman, int allow_billman, int allow_shutman, int allow_chargeman, int allow_statman){
 	cJSON *root_json = NULL;
 	FILE *fp_1st = fopen(FILE_POSITION, "rb+");
 
-	if (fp_1st != NULL) {
-//		if (!feof(fp_1st)) {
+	if (fp_1st != NULL){
+//		if (!feof(fp_1st)){
 //			root_json = cJSON_CreateObject();
 //		}else{
 		fseek(fp_1st, 0, SEEK_END);
@@ -59,7 +59,7 @@ int admin_add_core(char user[], char password[], int is_super, int allow_cardman
 	return 0;
 }
 
-void admin_get_json_value(char name[], char password[], int *is_super, int *allow_cardman, int *allow_billman, int *allow_shutman, int *allow_chargeman, int *allow_statman) {
+void admin_get_json_value(char name[], char password[], int *is_super, int *allow_cardman, int *allow_billman, int *allow_shutman, int *allow_chargeman, int *allow_statman){
 
 	//从文件中读取要解析的JSON数据
 	FILE *fp = fopen(FILE_POSITION, "r");
@@ -107,7 +107,7 @@ void admin_get_json_value(char name[], char password[], int *is_super, int *allo
 	free(data);					//一定要！！！
 }
 
-void admin_get_information(void) {
+void admin_get_information(void){
 
 	char user[MAX_USER_LEN];
 	char passwd[MAX_PASSWD];
@@ -115,7 +115,7 @@ void admin_get_information(void) {
 	int is_super = 0, allow_cardman = 0, allow_billman = 0, allow_shutman = 0, allow_chargeman = 0, allow_statman = 0;
 
 	printf("请输入要查询的管理员的用户名(12个字符以内)\n");
-	if (!scanf("%s", user)) {
+	if (!scanf("%s", user)){
 		printf("\n输入非法！退出");
 		return;
 	}
@@ -127,33 +127,33 @@ void admin_get_information(void) {
 	system("pause");
 }
 
-bool admin_get_permission(char * user, char type) {
+bool admin_get_permission(char * user, char type){
 	char passwd[MAX_PASSWD];
 	int is_super = 0, allow_cardman = 0, allow_billman = 0, allow_shutman = 0, allow_chargeman = 0, allow_statman = 0;
 	admin_get_json_value(user, passwd, &is_super, &allow_cardman, &allow_billman, &allow_shutman, &allow_chargeman, &allow_statman);
 	free(passwd);
-	switch (type) {
-		case 'a':if (allow_cardman == 1) {
+	switch (type){
+		case 'a':if (allow_cardman == 1){
 			return true;
 		};
 				 break;
-		case 'b':if (allow_billman == 1) {
+		case 'b':if (allow_billman == 1){
 			return true;
 		};
 				 break;
-		case 'm':if (allow_shutman == 1) {
+		case 'm':if (allow_shutman == 1){
 			return true;
 		};
 				 break;
-		case 'c':if (allow_chargeman == 1) {
+		case 'c':if (allow_chargeman == 1){
 			return true;
 		};
 				 break;
-		case 's':if (allow_statman == 1) {
+		case 's':if (allow_statman == 1){
 			return true;
 		};
 				 break;
-		default:if (is_super == 1) {
+		default:if (is_super == 1){
 			return true;
 		};
 				break;
@@ -161,7 +161,7 @@ bool admin_get_permission(char * user, char type) {
 	return false;
 }
 
-bool admin_is_passwd_right(char name[], char password[]) {
+bool admin_is_passwd_right(char name[], char password[]){
 
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
@@ -172,7 +172,7 @@ bool admin_is_passwd_right(char name[], char password[]) {
 	fclose(fp);
 
 	cJSON *root_json = cJSON_Parse(data);
-	if (NULL == root_json) {
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return false;
@@ -190,7 +190,7 @@ bool admin_is_passwd_right(char name[], char password[]) {
 
 }
 
-void admin_set_password(char name[], char newpasswd[]) {
+void admin_set_password(char name[], char newpasswd[]){
 	/*
 	 * 修改某个子对象的stringvalue值，恐怕不能直接像修改整数的值这样
 	 * 字符串长度会有变化的，而该对象的内存已经事先分配好了
@@ -224,7 +224,7 @@ void admin_set_password(char name[], char newpasswd[]) {
 }
 
 
-void admin_del_core(char name[]) {
+void admin_del_core(char name[]){
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -249,7 +249,7 @@ void admin_del_core(char name[]) {
 	cJSON_Delete(root_json);
 }
 
-bool admin_has_user(char name[]) {
+bool admin_has_user(char name[]){
 	FILE *fp = fopen(FILE_POSITION, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -270,7 +270,7 @@ bool admin_has_user(char name[]) {
 	return false;
 }
 
-void admin_set_permission(char *name, char type, int new_value) {
+void admin_set_permission(char *name, char type, int new_value){
 
 	/* 从文件中读取要解析的JSON数据 */
 	FILE *fp = fopen(FILE_POSITION, "r");
@@ -289,7 +289,7 @@ void admin_set_permission(char *name, char type, int new_value) {
 	}
 
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
-	switch (type) {
+	switch (type){
 	case 'a':cJSON_GetObjectItem(data_json, "allow_cardman")->valueint = new_value;
 		break;
 	case 'b':cJSON_GetObjectItem(data_json, "allow_billman")->valueint = new_value;
@@ -321,7 +321,7 @@ void admin_set_permission(char *name, char type, int new_value) {
 	cJSON_Delete(root_json);
 }
 
-struct admin write_permissions(char user[]) {
+struct admin write_permissions(char user[]){
 	struct admin result;
 	admin_get_json_value(user, result.password, &(result.is_super), &(result.allow_cardman), &(result.allow_billman), &(result.allow_shutman), &(result.allow_chargeman), &(result.allow_statman));
 	return result;

@@ -2,7 +2,7 @@
 #include "../card.h"
 
 
-void card_man_menu(void) {
+void card_man_menu(void){
 	system("cls");
 	system("color 6f");
 	card_man_head();
@@ -13,7 +13,7 @@ void card_man_menu(void) {
 	menu_card_man_jump();
 }
 
-void card_man_head(void) {
+void card_man_head(void){
 	print_equals(80);		//打印‘=’个数 
 	line_breaks(1);
 	card_man_content();
@@ -21,18 +21,18 @@ void card_man_head(void) {
 	print_equals(80);
 }
 
-void card_man_content(void) {
+void card_man_content(void){
 	puts_center("欢迎使用本网吧计费管理系统————卡管理");
 	line_breaks(1);
 	puts_center("在卡管理您可以执行添加卡、查询卡、删除卡操作。");
 	line_breaks(1);
 }
 
-void card_man_option(void) {
+void card_man_option(void){
 	printf("\t【1.添加卡】\t【2.查询卡】\t【3.删除卡】\t【0.返回】\t");
 }
 
-void card_man_add(void) {
+void card_man_add(void){
 	system("cls");
 	print_equals(80);
 	line_breaks(1);
@@ -41,20 +41,20 @@ void card_man_add(void) {
 	float balance = 0;
 	printf("\n=======添加卡======\n");
 	printf("请输入身份证号或护照号(即卡号)\n");
-	if (!scanf("%s", id)) {
+	if (!scanf("%s", id)){
 		fflush(stdin);
 		printf("\n输入非法！退出");
 		return;
 	}
 	puts("\n请输入卡密码");
-	if (!scanf("%s", passwd)) {
+	if (!scanf("%s", passwd)){
 		fflush(stdin);
 		printf("\n输入非法！退出");
 		return;
 	}
 
 	puts("\n请输入开卡金额");
-	if (!scanf("%f", &balance)) {
+	if (!scanf("%f", &balance)){
 		fflush(stdin);
 		printf("\n输入非法！退出");
 		return;
@@ -65,7 +65,7 @@ void card_man_add(void) {
 	card_man_menu();
 }
 
-void card_get_information(void) {
+void card_get_information(void){
 	system("cls");
 	print_equals(80);		
 	line_breaks(1);
@@ -74,7 +74,7 @@ void card_get_information(void) {
 	char passwd[MAX_PASSWD];
 
 	puts("请输入要查询的卡号\n");
-	if (!scanf("%s", id)) {
+	if (!scanf("%s", id)){
 		printf("\n输入非法！退出");
 		return;
 	}
@@ -108,7 +108,7 @@ void card_get_information(void) {
 	card_man_menu();
 }
 
-void card_man_del(void) {
+void card_man_del(void){
 	system("cls");
 	print_equals(80);
 	line_breaks(1);
@@ -116,13 +116,13 @@ void card_man_del(void) {
 	char temp[MAX_PASSWD];
 	printf("\n=======删卡退费======\n");
 	puts("请输入要删除的卡号\n");
-	if (!scanf("%s", id)) {
+	if (!scanf("%s", id)){
 		fflush(stdin);
 		printf("\n输入非法！退出");
 		return;
 	}
 
-	if (card_has(id)) {
+	if (card_has(id)){
 		float balance = card_get_json_value(id, temp);
 		card_del_core(id);
 		printf("\n此用户已被删除\n");
@@ -136,10 +136,10 @@ void card_man_del(void) {
 	card_man_menu();
 }
 
-void menu_card_man_jump(void) {
+void menu_card_man_jump(void){
 	char input = _getch();
 	fflush(stdin);
-	switch (input) {
+	switch (input){
 	case '0':index_menu();
 		break;
 	case ' ':index_menu();

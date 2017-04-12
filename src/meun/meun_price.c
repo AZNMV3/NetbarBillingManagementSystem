@@ -13,7 +13,7 @@ void price_check_a_billing_standards(void);	//菜单——查询计费标准
 void price_del_a_billing_standard(void);		//菜单——删除计费标准
 void price_modify_a_billing_standard(void);	//菜单——修改计费标准
 
-void price_menu(void) {
+void price_menu(void){
 	system("cls");
 	system("color 70");
 	price_head();
@@ -24,7 +24,7 @@ void price_menu(void) {
 	menu_price_jump();
 }
 
-void price_head(void) {
+void price_head(void){
 	print_equals(80);		//打印‘=’个数 
 	line_breaks(1);
 	price_content();
@@ -32,20 +32,20 @@ void price_head(void) {
 	print_equals(80);
 }
 
-void price_content(void) {
+void price_content(void){
 	puts_center("欢迎使用本网吧计费管理系统————计费标准管理");
 	line_breaks(1);
 	puts_center("在计费标准管理您可以新增、查询、删除、修改计费标准。");
 	line_breaks(1);
 }
 
-void price_option(void) {
+void price_option(void){
 	printf("\t【1.新增计费标准】\t【2.查询计费标准】\t【3.删除计费标准】\t");
 	line_breaks(1);
 	printf("\t【4.修改计费标准】\t\t\t\t【0.返回】\t");
 }
 
-void price_add_a_billing_standards(void) {
+void price_add_a_billing_standards(void){
 	int time_left_interval, time_right_interval;
 	float hour, price;
 	printf("\n请输入价格适用区间\n");
@@ -63,7 +63,7 @@ void price_add_a_billing_standards(void) {
 	price_menu();
 }
 
-void price_check_a_billing_standards(void) {
+void price_check_a_billing_standards(void){
 	int hour, time;
 	printf("\n请输入上机时间(单位:小时，可以输入至小数点后两位）\n");
 	scanf("%f", &hour);
@@ -77,7 +77,7 @@ void price_check_a_billing_standards(void) {
 	price_menu();
 }
 
-void price_del_a_billing_standard(void) {
+void price_del_a_billing_standard(void){
 	float hour;
 	printf("\n请输入要删除价格的价格开始区间(单位:小时，可以输入至小数点后两位）\n");
 	scanf("%f", &hour);
@@ -88,7 +88,7 @@ void price_del_a_billing_standard(void) {
 	price_menu();
 }
 
-void price_modify_a_billing_standard(void) {
+void price_modify_a_billing_standard(void){
 	int time_left_interval, time_right_interval;
 	float hour, price;
 	printf("\n请输入要修改的价格开始区间(单位:小时，可以输入至小数点后两位）\n");
@@ -106,10 +106,10 @@ void price_modify_a_billing_standard(void) {
 	price_menu();
 }
 
-void menu_price_jump(void) {
+void menu_price_jump(void){
 	char input = _getch();
 	fflush(stdin);
-	switch (input) {
+	switch (input){
 	case '0':index_menu();
 		break;
 	case ' ':index_menu();

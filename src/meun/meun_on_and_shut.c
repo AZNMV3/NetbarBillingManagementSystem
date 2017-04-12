@@ -4,7 +4,7 @@
 #include "../login.h"
 
 
-void on_and_shut_menu(void) {
+void on_and_shut_menu(void){
 	system("cls");
 	system("color 1f");
 	on_and_shut_head();
@@ -15,7 +15,7 @@ void on_and_shut_menu(void) {
 	menu_on_and_shut_jump();
 }
 
-void on_and_shut_head(void) {
+void on_and_shut_head(void){
 	print_equals(80);		//打印‘=’个数 
 	line_breaks(1);
 	on_and_shut_content();
@@ -23,26 +23,26 @@ void on_and_shut_head(void) {
 	print_equals(80);
 }
 
-void on_and_shut_content(void) {
+void on_and_shut_content(void){
 	puts_center("欢迎使用本网吧计费管理系统————上下机");
 	line_breaks(1);
 	puts_center("在计费管理您可以输入卡号上机或进行下机结算。");
 	line_breaks(2);
 }
 
-void on_and_shut_option(void) {
+void on_and_shut_option(void){
 	printf("\t【1.上机】\t【2.下机】\t【0.返回】\t");
 }
 
 
-void on_and_shut_power_on(void) {
+void on_and_shut_power_on(void){
 	char id[MAX_ID];
 	char *passwd;
 	//	char str[25];
 	printf("\n请输入卡号\n");
 	scanf("%s", id);
 	passwd = win_getpass("\n请输入密码\n");
-	if(!card_has(id)) {
+	if(!card_has(id)){
 		printf("卡号或密码错误");
 	}else{
 		if (can_card_login(id, passwd))
@@ -54,7 +54,7 @@ void on_and_shut_power_on(void) {
 	on_and_shut_menu();
 }
 
-void on_and_shut_power_off(void) {
+void on_and_shut_power_off(void){
 	char id[MAX_ID];
 	char temp[MAX_PASSWD];
 	printf("\n请输入卡号\n");
@@ -69,10 +69,10 @@ void on_and_shut_power_off(void) {
 	on_and_shut_menu();
 }
 
-void menu_on_and_shut_jump(void) {
+void menu_on_and_shut_jump(void){
 	char input = _getch();
 	fflush(stdin);
-	switch (input) {
+	switch (input){
 	case '0':index_menu();
 		break;
 	case ' ':index_menu();

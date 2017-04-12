@@ -1,11 +1,11 @@
 #include "card.h"
 
 
-int card_add_core(char id[], char passwd[],float balance) {
+int card_add_core(char id[], char passwd[],float balance){
 	cJSON *root_json = NULL;
 	FILE *fp_1st = fopen(FILE_NAME, "rb+");
 
-	if (fp_1st != NULL) {
+	if (fp_1st != NULL){
 		/*if(!feof(fp_1st)){
 			root_json = cJSON_CreateObject();
 		  }else{*/
@@ -44,7 +44,7 @@ int card_add_core(char id[], char passwd[],float balance) {
 	return 0;
 }
 
-float card_get_json_value(char id[], char password[]) {
+float card_get_json_value(char id[], char password[]){
 	float balance = 0;
 	//从文件中读取要解析的JSON数据
 	FILE *fp = fopen(FILE_NAME, "r");
@@ -73,7 +73,7 @@ float card_get_json_value(char id[], char password[]) {
 }
 
 
-bool card_is_passwd_right(char id[],char passwd[]) {
+bool card_is_passwd_right(char id[],char passwd[]){
 
 	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
@@ -132,7 +132,7 @@ void card_set_password(char id[],char newpasswd[]){
 }
 
 
-void card_del_core (char id[]) {
+void card_del_core (char id[]){
 	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -205,7 +205,7 @@ void top_up (char id[],float money){
 	cJSON_Delete(root_json);
 }
 
-void cost(char id[], float money) {
+void cost(char id[], float money){
 	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
@@ -231,7 +231,7 @@ void cost(char id[], float money) {
 	cJSON_Delete(root_json);
 }
 
-bool can_card_login(char id[], char passwd[]) {
+bool can_card_login(char id[], char passwd[]){
 	FILE *fp = fopen(FILE_NAME, "r");
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);

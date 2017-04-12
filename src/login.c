@@ -26,7 +26,7 @@ char* win_getpass(const char* prompt){
 		if(tmp == 13){					//13='CR' which means »Ø³µ(Carriage Return)
 			buf[i] = '\0';
 			break;
-		}else if(tmp == 8) {
+		}else if(tmp == 8){
 			if (i > 0)
 				i -= 2;
 			if (i == 0)
@@ -70,6 +70,6 @@ bool admin_login(void){
 	return false;
 }
 
-void now_login_admin_permissions(char user[]) {
+void now_login_admin_permissions(char user[]){
 	now_admin=write_permissions(user);
 }
