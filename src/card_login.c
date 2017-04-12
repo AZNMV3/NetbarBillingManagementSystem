@@ -6,7 +6,7 @@
 void writeLogLine(const char *content)
 {
 	FILE *fp;
-	if ((fp = fopen("./data/login.txt", "a")) == NULL)
+	if ((fp = fopen(CARD_LOGIN_FILE_POSITION, "a")) == NULL)
 	{
 		printf("Open Failed.\n");
 		return;
@@ -15,9 +15,9 @@ void writeLogLine(const char *content)
 	fclose(fp);
 }
 
-void write_login(int time, const char *id) {
+void write_login(int time, const char *id){
 	FILE *fp;
-	if ((fp = fopen("./data/login.txt", "a")) == NULL)
+	if ((fp = fopen(CARD_LOGIN_FILE_POSITION, "a")) == NULL)
 	{
 		printf("Open Failed.\n");
 		return;
@@ -26,15 +26,14 @@ void write_login(int time, const char *id) {
 	fclose(fp);
 }
 
-int time_sec(void) {
+int time_sec(void){
 	return (int)time((time_t*)NULL);
 }
 
 
-void access_out(char id[]) {
+void access_out(char id[]){
 	FILE *fp;
-	if ((fp = fopen("./data/login.txt", "a+")) == NULL)
-	{
+	if ((fp = fopen(CARD_LOGIN_FILE_POSITION, "a+")) == NULL){
 		printf("Open Failed.\n");
 		return;
 	}
@@ -42,21 +41,20 @@ void access_out(char id[]) {
 	fclose(fp);
 }
 
-int start_time_get(char id[]) {
+int start_time_get(char id[]){
 	char temp[MAX_ID];
 	temp[MAX_ID - 1] = '\0';
 	int time_left_interval;
 	FILE *fp;
-	if ((fp = fopen("./data/login.txt", "r")) == NULL)
-	{
+	if ((fp = fopen(CARD_LOGIN_FILE_POSITION, "r")) == NULL){
 		printf("Open Failed.\n");
 		return 0;
 	}
-	while (1) {
+	while (1){
 		if (feof(fp))
 			break;
 		fscanf(fp, "%s%d", temp, &time_left_interval);
-		if (strcmp(temp, id) == 0) {
+		if (strcmp(temp, id) == 0){
 			return time_left_interval;
 		}
 		if (feof(fp))
@@ -68,9 +66,9 @@ int start_time_get(char id[]) {
 }
 
 
-void shut_log(char id[], int ago, float cost_money) {
+void shut_log(char id[], int ago, float cost_money){
 	FILE *fp;
-	if ((fp = fopen("./data/log.txt", "a+")) == NULL) {
+	if ((fp = fopen("./data/log.txt", "a+")) == NULL){
 		printf("Open Failed.\n");
 		return;
 	}
@@ -90,23 +88,23 @@ void shut_log(char id[], int ago, float cost_money) {
 	fclose(fp);
 }
 
-void shut_core(char id[]) {
+void shut_core(char id[]){
 	int time, temp_int;
 	char temp[MAX_ID];
 	int time_left_interval = 0;
 	int time_right_interval = time_sec();
 	FILE *fp = NULL;
 	temp[MAX_ID - 1] = '\0';
-	if ((fp = fopen("./data/login.txt", "r+")) == NULL)
+	if ((fp = fopen(CARD_LOGIN_FILE_POSITION, "r+")) == NULL)
 	{
 		printf("File Open Failed.\n");
 		return;
 	}
-	while (1) {
+	while (1){
 		if (feof(fp))
 			break;
 		fscanf(fp, "%s%d", temp, &temp_int);
-		if (!strcmp(id, temp)) {
+		if (!strcmp(id, temp)){
 			fclose(fp);
 			time_left_interval = temp_int;
 			break;
@@ -124,34 +122,38 @@ void shut_core(char id[]) {
 	shut_log(id, time_left_interval, cost_money);
 }
 
-void del_after(char id[]) {
+void del_after(char id[]){
 	FILE *fp;
 	char s[160] = "";			//用于保存
 	char temp[MAX_ID];
 	temp[MAX_ID - 1] = '\0';
 
-	if ((fp = fopen("./data/login.txt", "r")) == NULL) {
+	if ((fp = fopen(CARD_LOGIN_FILE_POSITION, "r")) == NULL){
 		printf("Can't Open File!");
 		return;
 	}
 
 	fseek(fp, 0, SEEK_END);
 	long len = ftell(fp);
+	if(len == 0){
+		puts("不存在");
+		return;
+	}
 	char *data = (char*)malloc(sizeof(char)*len + 1);
 	*data = 0;
 	fseek(fp, 0, SEEK_SET);
 	int temp_int;
-	while (ftell(fp) < len - 3) {
+	while (ftell(fp) < len - 3){
 		fgets(s, 150, fp);
 		sscanf(s, "%s%d", temp, &temp_int);
-		if (!strcmp(temp, id)) {
+		if (!strcmp(temp, id)){
 			strcat(data, "\n");
 			continue;
 		}
 		strcat(data, s);			//保存读取到的信息 */
 	}
 	fclose(fp);
-	fp = fopen("./data/login.txt", "wb+");		//重新以写的方式打开文件 
+	fp = fopen(CARD_LOGIN_FILE_POSITION, "wb+");		//重新以写的方式打开文件 
 	fputs(data, fp);					//把内存信息存储到文件中 
 	fclose(fp);
 	fflush(stdin);

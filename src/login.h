@@ -11,6 +11,8 @@
 #include <conio.h>
 #include <stdbool.h>
 
+#define CARD_LOGIN_FILE_POSITION "./data/login.txt"
+
 /*CARD_LOGIN*/
 extern void write_login(int time, const char *id);
 extern void access_out(char id[]);

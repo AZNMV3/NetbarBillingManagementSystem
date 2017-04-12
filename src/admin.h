@@ -10,6 +10,7 @@
 #include<string.h>
 #include"./include/cJSON.h"
 #include <stdbool.h>
+
 #define FILE_POSITION "./data/admin.json"
 
 struct admin {

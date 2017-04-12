@@ -4,7 +4,7 @@
 extern unsigned char now_login_admin[MAX_USER_LEN];
 extern struct admin now_admin;
 
-void index_menu(void) {
+void index_menu(void){
 	system("cls");
 	system("color 3f");
 	index_head();
@@ -15,7 +15,7 @@ void index_menu(void) {
 	menu_index_jump();
 }
 
-void index_head(void) {
+void index_head(void){
 	print_equals(80);		//打印‘=’个数 
 	line_breaks(1);
 	index_content();
@@ -23,7 +23,7 @@ void index_head(void) {
 	print_equals(80);
 }
 
-void index_content(void) {
+void index_content(void){
 	puts_center("欢迎使用本网吧计费管理系统");
 	line_breaks(1);
 	puts_center("本系统由卡管理、计费标准管理、上下机管理、费用管理、");
@@ -31,17 +31,18 @@ void index_content(void) {
 	line_breaks(1);
 }
 
-void index_option(void) {
+void index_option(void){
 	printf("\t【1.卡管理】\t【2.计费标准】\t【3.上下机】\t【4.费用管理】\t");
 	line_breaks(1);
 	printf("\t【5.统计查询】\t【6.权限管理】\t\t【0.登出】\t");
 }
 
-void menu_index_jump(void) {
+void menu_index_jump(void){
 	char input = _getch();
 	fflush(stdin);
-	switch (input) {
+	switch (input){
 	case '0':exit(0);
+	case 27:exit(0);				//27--ESC
 	case '1':if(can_user_enter('a'))
 				card_man_menu();
 			else
@@ -78,7 +79,7 @@ void menu_index_jump(void) {
 }
 
 bool can_user_enter(char type){
-	switch (type) {
+	switch (type){
 	case 'a':if (now_admin.allow_cardman == 1) 
 		return true;
 			 break;

@@ -1,5 +1,6 @@
 #include "login.h"
 #include "admin.h"
+#include "menu.h"
 
 
 unsigned char now_login_admin[MAX_USER_LEN];
@@ -25,7 +26,7 @@ char* win_getpass(const char* prompt){
 		if(tmp == 13){					//13='CR' which means 回车(Carriage Return)
 			buf[i] = '\0';
 			break;
-		}else if(tmp == 8) {
+		}else if(tmp == 8){
 			if (i > 0)
 				i -= 2;
 			if (i == 0)
@@ -39,10 +40,12 @@ char* win_getpass(const char* prompt){
 				SetConsoleCursorPosition(hout, coord);
 			}
 		continue;
-		}
+		}else if (tmp == 27)
+			exit(0);
 		buf[i] = tmp;
 		putchar(' ');
 	}
+	buf[i] = '\0';
 	puts(buf);
 	putchar('\n');
 	return buf;
@@ -52,7 +55,7 @@ bool admin_login(void){
 	system("color 2E");
 	unsigned char username[MAX_USER_LEN];
 	char *password;
-	printf("\n\n\n\n\n\n");
+	puts("\n\n\n\n\n");
 	printf("\t\t\t\t\t");
 	printf("管理用户:");
 	scanf("%s",username);
@@ -67,6 +70,6 @@ bool admin_login(void){
 	return false;
 }
 
-void now_login_admin_permissions(char user[]) {
+void now_login_admin_permissions(char user[]){
 	now_admin=write_permissions(user);
 }

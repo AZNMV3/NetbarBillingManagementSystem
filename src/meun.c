@@ -6,11 +6,11 @@
 #include "menu.h"
 
 
-void prompt_input(void) {
+void prompt_input(void){
 	printf("请输入相应数字以进入对应系统:\t\t");
 }
 
-void menu_wrong_prompt(void) {
+void menu_wrong_prompt(void){
 	//	system("cls");
 	system("color 4F");
 	line_breaks(1);
@@ -28,7 +28,7 @@ void menu_wrong_prompt(void) {
 	system("cls");
 }
 
-void menu_no_permission_prompt(void) {
+void menu_no_permission_prompt(void){
 	//	system("cls");
 	system("color 4F");
 	line_breaks(1);
@@ -46,8 +46,7 @@ void menu_no_permission_prompt(void) {
 	system("cls");
 }
 
-void puts_center(const char* txt)
-{
+void puts_center(const char* txt){
 	int len, col;
 	for (len = strlen(txt); len > 0; len -= col, txt += col){
 		col = len < 80 ? len : 80;
@@ -55,13 +54,13 @@ void puts_center(const char* txt)
 	}
 }
 
-void print_equals(int num) {
+void print_equals(int num){
 	int i = 0;
 	for (; i < num; i++)
 		printf("=");
 }
 
-void line_breaks(int num) {
+void line_breaks(int num){
 	int i = 0;
 	for (; i <= num; i++)
 		printf("\n");
