@@ -18,6 +18,5 @@ extern void price_del_core(int time_left_interval);
 
 extern void statistics_print_out_an_user(char id[]);
 extern float statistics_between(int time_left_year, int time_left_month, int time_left_day, int time_right_year, int time_right_month, int time_right_day, int * count);
-extern bool statistics_month_core(void);
 extern void statistics_print_out_an_month(void);
 #endif
