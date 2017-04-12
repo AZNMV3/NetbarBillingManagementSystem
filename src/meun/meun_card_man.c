@@ -78,7 +78,7 @@ void card_get_information(void) {
 		printf("\n输入非法！退出");
 		return;
 	}
-
+	ULONGLONG start_time = GetTickCount64();
 	if (card_has(id))
 		balance = card_get_json_value(id, passwd);
 	else{
@@ -99,8 +99,10 @@ void card_get_information(void) {
 	print_equals(60);
 	line_breaks(1);
 	printf("%s\t%s\t\t\t%.2f",id,passwd,balance);
+	ULONGLONG stop_time = GetTickCount64();
 	line_breaks(2);
 	print_equals(80);
+	printf("\n查询耗时 %lldms", stop_time - start_time);
 	line_breaks(2);
 	system("pause");
 	card_man_menu();
@@ -139,6 +141,10 @@ void menu_card_man_jump(void) {
 	fflush(stdin);
 	switch (input) {
 	case '0':index_menu();
+		break;
+	case ' ':index_menu();
+		break;
+	case 8:index_menu();			//8--BACKSPACE
 		break;
 	case '1':card_man_add();
 		break;

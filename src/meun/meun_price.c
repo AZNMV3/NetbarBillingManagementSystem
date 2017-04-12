@@ -40,9 +40,9 @@ void price_content(void) {
 }
 
 void price_option(void) {
-	printf("【1.新增计费标准】\t【2.查询计费标准】\t【3.删除计费标准】\t");
+	printf("\t【1.新增计费标准】\t【2.查询计费标准】\t【3.删除计费标准】\t");
 	line_breaks(1);
-	printf("\t【4.修改计费标准】\t\t【0.返回】\t");
+	printf("\t【4.修改计费标准】\t\t\t\t【0.返回】\t");
 }
 
 void price_add_a_billing_standards(void) {
@@ -64,10 +64,13 @@ void price_add_a_billing_standards(void) {
 }
 
 void price_check_a_billing_standards(void) {
-
-
-
-
+	int hour, time;
+	printf("\n请输入上机时间(单位:小时，可以输入至小数点后两位）\n");
+	scanf("%f", &hour);
+	time = (int)(1.0 * hour * 3600);
+	float price = price_read(time);
+	
+	printf("该时间应付费用为%.2f元", price);
 
 	line_breaks(2);
 	system("pause");
@@ -108,6 +111,10 @@ void menu_price_jump(void) {
 	fflush(stdin);
 	switch (input) {
 	case '0':index_menu();
+		break;
+	case ' ':index_menu();
+		break;
+	case 8:index_menu();			//8--BACKSPACE
 		break;
 	case '1':price_add_a_billing_standards();
 		break;

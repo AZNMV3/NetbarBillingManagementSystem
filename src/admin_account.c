@@ -23,14 +23,14 @@ int admin_add_core(char user[], char password[], int is_super, int allow_cardman
 		root_json = cJSON_CreateObject();		//root节点
 	}
 
-	cJSON *data_json = cJSON_CreateObject();		//管理员信息节点
+	cJSON *data_json = cJSON_CreateObject();	//管理员信息节点
 
 	/*添加管理员信息（使用键值对）*/
 
 //	cJSON_AddItemToObject(root_json, "name", cJSON_CreateString(user));		//root节点用户名 (废弃)
 //	cJSON_AddItemToObject(root_json, user, cJSON_CreateString(user));		//root节点第一个用户名项 (废弃)
 
-	cJSON_AddItemToObject(root_json, user, data_json);								//使data节点从属于root节点，并将data节点命名为用户名
+	cJSON_AddItemToObject(root_json, user, data_json);						//使data节点从属于root节点，并将data节点命名为用户名
 
 	cJSON_AddItemToObject(data_json, "username", cJSON_CreateString(user));			//用户名
 	cJSON_AddNumberToObject(data_json, "allow_cardman", allow_cardman);				//卡管理权限
@@ -73,8 +73,7 @@ void admin_get_json_value(char name[], char password[], int *is_super, int *allo
 
 	//解析JSON数据
 	cJSON *root_json = cJSON_Parse(data);    //将字符串解析成json结构体
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;
@@ -106,7 +105,6 @@ void admin_get_json_value(char name[], char password[], int *is_super, int *allo
 	*allow_statman = cJSON_GetObjectItem(data_json, "allow_statman")->valueint;
 
 	free(data);					//一定要！！！
-
 }
 
 void admin_get_information(void) {
@@ -135,30 +133,30 @@ bool admin_get_permission(char * user, char type) {
 	admin_get_json_value(user, passwd, &is_super, &allow_cardman, &allow_billman, &allow_shutman, &allow_chargeman, &allow_statman);
 	free(passwd);
 	switch (type) {
-	case 'a':if (allow_cardman == 1) {
-		return true;
-	};
-			 break;
-	case 'b':if (allow_billman == 1) {
-		return true;
-	};
-			 break;
-	case 'm':if (allow_shutman == 1) {
-		return true;
-	};
-			 break;
-	case 'c':if (allow_chargeman == 1) {
-		return true;
-	};
-			 break;
-	case 's':if (allow_statman == 1) {
-		return true;
-	};
-			 break;
-	default:if (is_super == 1) {
-		return true;
-	};
-			break;
+		case 'a':if (allow_cardman == 1) {
+			return true;
+		};
+				 break;
+		case 'b':if (allow_billman == 1) {
+			return true;
+		};
+				 break;
+		case 'm':if (allow_shutman == 1) {
+			return true;
+		};
+				 break;
+		case 'c':if (allow_chargeman == 1) {
+			return true;
+		};
+				 break;
+		case 's':if (allow_statman == 1) {
+			return true;
+		};
+				 break;
+		default:if (is_super == 1) {
+			return true;
+		};
+				break;
 	}
 	return false;
 }
@@ -208,8 +206,7 @@ void admin_set_password(char name[], char newpasswd[]) {
 	fread(data, 1, len, fp);
 	fclose(fp);
 	cJSON *root_json = cJSON_Parse(data);
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;
@@ -236,8 +233,7 @@ void admin_del_core(char name[]) {
 	fread(data, 1, len, fp);
 	fclose(fp);
 	cJSON *root_json = cJSON_Parse(data);    //将字符串解析成json结构体
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;
@@ -263,8 +259,7 @@ bool admin_has_user(char name[]) {
 	fclose(fp);
 
 	cJSON *root_json = cJSON_Parse(data);    //将字符串解析成json结构体
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return false;
@@ -287,8 +282,7 @@ void admin_set_permission(char *name, char type, int new_value) {
 	fclose(fp);
 
 	cJSON *root_json = cJSON_Parse(data);    //将字符串解析成json结构体
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;

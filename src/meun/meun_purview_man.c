@@ -30,7 +30,7 @@ void purview_man_content(void) {
 }
 
 void purview_man_option(void) {
-	printf("【1.添加管理员】\t【2.删除管理员】\t【3.配置权限】\t【0.返回】");
+	printf("\t【1.添加管理员】\t【2.删除管理员】\t【3.配置权限】\t【0.返回】");
 }
 
 void purview_man_add_admin(void) {
@@ -162,7 +162,7 @@ void purview_man_configure_permissions(void) {
 		printf("\n0.关闭\n1.开启 \n");
 		scanf("%d", &value);
 		fflush(stdin);
-		if (value != 1 || value != 0)
+		if (value != 1 && value != 0)
 			type = 0;
 		if (!type)
 			admin_set_permission(user, type, value);
@@ -179,6 +179,10 @@ void menu_purview_man_jump(void) {
 	fflush(stdin);
 	switch (input) {
 	case '0':index_menu();
+		break;
+	case ' ':index_menu();
+		break;
+	case 8:index_menu();			//8--BACKSPACE
 		break;
 	case '1':purview_man_add_admin();
 		break;

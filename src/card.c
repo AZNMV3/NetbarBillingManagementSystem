@@ -63,11 +63,9 @@ float card_get_json_value(char id[], char password[]) {
 		return 0;
 	}
 
-
 	cJSON *data_json = cJSON_GetObjectItem(root_json, id);
 
 	sprintf(password, "%s", cJSON_GetObjectItem(data_json, "userpass")->valuestring);
-
 	balance =(float) cJSON_GetObjectItem(data_json, "balance")->valuedouble;
 
 	free(data);					//一定要！！！
@@ -116,8 +114,7 @@ void card_set_password(char id[],char newpasswd[]){
 	fread(data, 1, len, fp);
 	fclose(fp);
 	cJSON *root_json = cJSON_Parse(data);
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;
@@ -144,8 +141,7 @@ void card_del_core (char id[]) {
 	fread(data, 1, len, fp);
 	fclose(fp);
 	cJSON *root_json = cJSON_Parse(data);    //将字符串解析成json结构体
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;
@@ -171,8 +167,7 @@ bool card_has(char id[]){
 	fclose(fp);
 
 	cJSON *root_json = cJSON_Parse(data);    //将字符串解析成json结构体
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return false;
@@ -192,8 +187,7 @@ void top_up (char id[],float money){
 	fread(data, 1, len, fp);
 	fclose(fp);
 	cJSON *root_json = cJSON_Parse(data);
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;
@@ -220,8 +214,7 @@ void cost(char id[], float money) {
 	fread(data, 1, len, fp);
 	fclose(fp);
 	cJSON *root_json = cJSON_Parse(data);
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return;
@@ -248,8 +241,7 @@ bool can_card_login(char id[], char passwd[]) {
 	fclose(fp);
 
 	cJSON *root_json = cJSON_Parse(data);
-	if (NULL == root_json)
-	{
+	if (NULL == root_json){
 		printf("error:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return 0;

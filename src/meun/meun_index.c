@@ -42,6 +42,7 @@ void menu_index_jump(void) {
 	fflush(stdin);
 	switch (input) {
 	case '0':exit(0);
+	case 27:exit(0);				//27--ESC
 	case '1':if(can_user_enter('a'))
 				card_man_menu();
 			else

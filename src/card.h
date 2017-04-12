@@ -6,9 +6,11 @@
 #define MAX_PASSWD 30
 #define MIN_CAN_LOGIN_BALANCE 0.40
 /* Head Files */
-
+#include<stdio.h>
+#include<stdlib.h>
 #include<string.h>
 #include"./include/cJSON.h"
+#include <stdbool.h>
 
 
 #define FILE_NAME "./data/card.json"

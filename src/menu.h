@@ -5,28 +5,11 @@
 /* Head Files */
 #include <stdio.h> 
 #include <stdlib.h>
-#include <tchar.h> 
+#include <windows.h> 
 #include <conio.h> 
 #include <time.h> 
 #include <stdbool.h>
 
-/*
-const WORD FORE_BLUE = FOREGROUND_BLUE;           //蓝色文本属性  
-const WORD FORE_GREEN = FOREGROUND_GREEN;          //绿色文本属性  
-const WORD FORE_RED = FOREGROUND_RED;            //红色文本属性  
-//const WORD FORE_PURPLE = FORE_BLUE | FORE_RED;      //紫色文本属性  
-//const WORD FORE_CYAN = FORE_BLUE | FORE_GREEN;    //青色文本属性  
-//const WORD FORE_YELLOW = FORE_RED | FORE_GREEN;     //黄色文本属性  
-const WORD FORE_GRAY = FOREGROUND_INTENSITY;      //灰色文本属性 
-*/
-
-/* Time */
-#if defined(WIN32)
-# define  TIMEB    _timeb
-# define  ftime    _ftime
-#else
-#define TIMEB timeb
-#endif
 
 /* 功能函数 */
 extern void puts_center(const char* txt);
@@ -96,4 +79,15 @@ void index_head(void);
 void index_content(void);
 void menu_index_jump(void);
 bool can_user_enter(char type);
+
+/* meun_statistics.c */
+void statistics_menu(void);				//菜单——查询统计模块主菜单
+void statistics_option(void);				//菜单——选项
+void statistics_head(void);				//菜单——头部
+void statistics_content(void);				//菜单——欢迎信息
+void menu_statistics_jump(void);
+
+void statistics_transactions(void);		//菜单——查询消费记录
+void statistics_total_turnover(void);		//菜单——统计总营业额
+void statistics_monthly_turnover(void);	//菜单--统计月营业额
 #endif

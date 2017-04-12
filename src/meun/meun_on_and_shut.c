@@ -75,6 +75,10 @@ void menu_on_and_shut_jump(void) {
 	switch (input) {
 	case '0':index_menu();
 		break;
+	case ' ':index_menu();
+		break;
+	case 8:index_menu();			//8--BACKSPACE
+		break;
 	case '1':on_and_shut_power_on();
 		break;
 	case'2':on_and_shut_power_off();

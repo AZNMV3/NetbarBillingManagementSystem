@@ -97,6 +97,10 @@ void menu_balance_jump(void) {
 	switch (input) {
 	case '0':index_menu();
 		break;
+	case ' ':index_menu();
+		break;
+	case 8:index_menu();			//8--BACKSPACE
+		break;
 	case '1':balance_man_top_up();
 		break;
 	case'2':balance_man_withdraw();
