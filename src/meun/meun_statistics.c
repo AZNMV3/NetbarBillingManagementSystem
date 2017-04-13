@@ -3,15 +3,17 @@
 #include "../price.h"
 
 
-void statistics_menu(void){
-	system("cls");
-	system("color F0");
-	statistics_head();
-	line_breaks(1);
-	statistics_option();
-	line_breaks(2);
-	prompt_input();
-	menu_statistics_jump();
+void statistics_menu(void) {
+	while (true) {
+		system("cls");
+		system("color F0");
+		statistics_head();
+		line_breaks(1);
+		statistics_option();
+		line_breaks(2);
+		prompt_input();
+		menu_statistics_jump();	
+	}
 }
 
 void statistics_head(void){
@@ -52,7 +54,7 @@ void statistics_transactions(void){
 	}
 	line_breaks(2);
 	system("pause");
-	statistics_menu();
+	return;
 }
 
 void statistics_total_turnover(void){
@@ -86,7 +88,7 @@ void statistics_total_turnover(void){
 	print_equals(80);
 	printf("\n²éÑ¯ºÄÊ± %lldms", stop_time - start_time);
 	system("pause");
-	statistics_menu();
+	return;
 }
 
 void statistics_monthly_turnover(void){
@@ -105,7 +107,7 @@ void statistics_monthly_turnover(void){
 	line_breaks(2);
 	print_equals(80);
 	system("pause");
-	statistics_menu();
+	return;
 }
 
 void menu_statistics_jump(void){

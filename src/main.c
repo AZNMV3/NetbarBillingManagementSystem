@@ -6,7 +6,7 @@ extern struct admin now_admin;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]){
-//	while(true){
+	while(true){
 		system("chcp 936");
 		system("cls");
 		if (admin_login()){
@@ -16,6 +16,6 @@ int main(int argc, char *argv[]){
 			puts("We can't let you log in. Please check your username and password.");
 			system("pause");
 		}
-//	}
+	}
 	return 0;
 }

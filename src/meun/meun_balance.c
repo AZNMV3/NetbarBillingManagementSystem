@@ -3,6 +3,7 @@
 
 
 void balance_man_menu(void){
+	while (true){
 	system("cls");
 	system("color 5f");
 	balance_man_head();
@@ -11,6 +12,7 @@ void balance_man_menu(void){
 	line_breaks(2);
 	prompt_input();
 	menu_balance_jump();
+	}
 }
 
 void balance_man_head(void){
@@ -60,7 +62,7 @@ void balance_man_top_up(void){
 	}
 	line_breaks(2);
 	system("pause");
-	balance_man_menu();
+	return;
 }
 
 
@@ -88,7 +90,7 @@ void balance_man_withdraw(void){
 	}
 	line_breaks(2);
 	system("pause");
-	balance_man_menu();
+	return;
 }
 
 void menu_balance_jump(void){

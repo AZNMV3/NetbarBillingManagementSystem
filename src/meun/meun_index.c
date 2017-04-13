@@ -5,14 +5,16 @@ extern unsigned char now_login_admin[MAX_USER_LEN];
 extern struct admin now_admin;
 
 void index_menu(void){
-	system("cls");
-	system("color 3f");
-	index_head();
-	line_breaks(1);
-	index_option();
-	line_breaks(1);
-	prompt_input();
-	menu_index_jump();
+	while(true){
+		system("cls");
+		system("color 3f");
+		index_head();
+		line_breaks(1);
+		index_option();
+		line_breaks(1);
+		prompt_input();
+		menu_index_jump();
+	}
 }
 
 void index_head(void){
@@ -46,35 +48,28 @@ void menu_index_jump(void){
 	case '1':if(can_user_enter('a'))
 				card_man_menu();
 			else
-				menu_no_permission_prompt(); index_menu();
-		break;
+				menu_no_permission_prompt(); return;
 	case'2':if (can_user_enter('b'))
 				price_menu();
 			else
-				menu_no_permission_prompt(); index_menu();
-		break;
+				menu_no_permission_prompt(); return;
 	case'3':if (can_user_enter('m'))
 				on_and_shut_menu();
 			else
-				menu_no_permission_prompt(); index_menu();
-		break;
+				menu_no_permission_prompt(); return;
 	case '4':if(can_user_enter('c'))
 				balance_man_menu();
 			 else
-				 menu_no_permission_prompt(); index_menu();
-		break;
+				 menu_no_permission_prompt(); return;
 	case '5':if(can_user_enter('s'))
 				statistics_menu();
 			 else
-				 menu_no_permission_prompt(); index_menu();
-		break;
+				 menu_no_permission_prompt(); return;
 	case '6':if (can_user_enter('z'))
 				purview_man_menu();
 			 else
-				 menu_no_permission_prompt(); index_menu(); 
-		break;
-	default:menu_wrong_prompt(); index_menu();
-		break;
+				 menu_no_permission_prompt(); return;
+	default:menu_wrong_prompt(); return;
 	}
 }
 

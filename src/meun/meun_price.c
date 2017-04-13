@@ -14,14 +14,16 @@ void price_del_a_billing_standard(void);		//菜单——删除计费标准
 void price_modify_a_billing_standard(void);	//菜单——修改计费标准
 
 void price_menu(void){
-	system("cls");
-	system("color 70");
-	price_head();
-	line_breaks(1);
-	price_option();
-	line_breaks(1);
-	prompt_input();
-	menu_price_jump();
+	while (true) {
+		system("cls");
+		system("color 70");
+		price_head();
+		line_breaks(1);
+		price_option();
+		line_breaks(1);
+		prompt_input();
+		menu_price_jump();
+	}
 }
 
 void price_head(void){
@@ -60,11 +62,12 @@ void price_add_a_billing_standards(void){
 	price_add_core(time_left_interval, time_right_interval, price);
 	line_breaks(2);
 	system("pause");
-	price_menu();
+	return;
 }
 
 void price_check_a_billing_standards(void){
-	int hour, time;
+	float hour;
+	int time;
 	printf("\n请输入上机时间(单位:小时，可以输入至小数点后两位）\n");
 	scanf("%f", &hour);
 	time = (int)(1.0 * hour * 3600);
@@ -74,7 +77,7 @@ void price_check_a_billing_standards(void){
 
 	line_breaks(2);
 	system("pause");
-	price_menu();
+	return;
 }
 
 void price_del_a_billing_standard(void){
@@ -85,7 +88,7 @@ void price_del_a_billing_standard(void){
 	price_del_core(time_left_interval);
 	line_breaks(2);
 	system("pause");
-	price_menu();
+	return;
 }
 
 void price_modify_a_billing_standard(void){
@@ -103,7 +106,7 @@ void price_modify_a_billing_standard(void){
 	price_add_core(time_left_interval, time_right_interval, price);
 	line_breaks(2);
 	system("pause");
-	price_menu();
+	return;
 }
 
 void menu_price_jump(void){

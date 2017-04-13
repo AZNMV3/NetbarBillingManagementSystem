@@ -48,7 +48,7 @@ void menu_no_permission_prompt(void){
 
 void puts_center(const char* txt){
 	int len, col;
-	for (len = strlen(txt); len > 0; len -= col, txt += col){
+	for (len = (int)strlen(txt); len > 0; len -= col, txt += col){
 		col = len < 80 ? len : 80;
 		printf("%*.*s\n", 40 + col / 2, col, txt);
 	}

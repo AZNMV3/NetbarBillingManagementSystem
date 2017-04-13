@@ -117,9 +117,9 @@ void shut_core(char id[]){
 		return;
 	time = time_right_interval - time_left_interval;
 	double cost_money = price_read(time)*(time / 3600.00);
-	cost(id, cost_money);
+	cost(id, (float)cost_money);
 	del_after(id);
-	shut_log(id, time_left_interval, cost_money);
+	shut_log(id, time_left_interval, (float)cost_money);
 }
 
 void del_after(char id[]){
