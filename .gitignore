@@ -257,3 +257,5 @@ paket-files/
 *.user
 
 data/
+*.exe
+/NetbarBillingManagementSystem.exe
