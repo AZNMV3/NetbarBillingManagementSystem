@@ -5,14 +5,16 @@
 
 
 void on_and_shut_menu(void){
-	system("cls");
-	system("color 1f");
-	on_and_shut_head();
-	line_breaks(1);
-	on_and_shut_option();
-	line_breaks(2);
-	prompt_input();
-	menu_on_and_shut_jump();
+	while (true){
+		system("cls");
+		system("color 1f");
+		on_and_shut_head();
+		line_breaks(1);
+		on_and_shut_option();
+		line_breaks(2);
+		prompt_input();
+		menu_on_and_shut_jump();
+	}
 }
 
 void on_and_shut_head(void){
@@ -51,7 +53,7 @@ void on_and_shut_power_on(void){
 		printf("ø®∫≈ªÚ√‹¬Î¥ÌŒÛ");
 	}
 	system("pause");
-	on_and_shut_menu();
+	return;
 }
 
 void on_and_shut_power_off(void){
@@ -66,7 +68,7 @@ void on_and_shut_power_off(void){
 		puts("’À∫≈≤ª¥Ê‘⁄£¨«ÎºÏ≤È ‰»Î£°");
 	}
 	system("pause");
-	on_and_shut_menu();
+	return;
 }
 
 void menu_on_and_shut_jump(void){

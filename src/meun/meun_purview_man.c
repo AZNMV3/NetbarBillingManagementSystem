@@ -3,14 +3,16 @@
 
 
 void purview_man_menu(void){
-	system("cls");
-	system("color 2f");
-	purview_man_head();
-	line_breaks(1);
-	purview_man_option();
-	line_breaks(2);
-	prompt_input();
-	menu_purview_man_jump();
+	while (true){
+		system("cls");
+		system("color 2f");
+		purview_man_head();
+		line_breaks(1);
+		purview_man_option();
+		line_breaks(2);
+		prompt_input();
+		menu_purview_man_jump();
+	}
 }
 
 void purview_man_head(void){
@@ -88,7 +90,7 @@ void purview_man_add_admin(void){
 	admin_add_core(user, passwd, is_super, allow_cardman, allow_billman, allow_shutman, allow_chargeman, allow_statman);
 	line_breaks(1);
 	system("pause");
-	purview_man_menu();
+	return;
 }
 
 void purview_man_del_admin(void){
@@ -118,7 +120,7 @@ void purview_man_del_admin(void){
 	}
 	line_breaks(1);
 	system("pause");
-	purview_man_menu();
+	return;
 }
 
 void purview_man_configure_permissions(void){
@@ -171,7 +173,7 @@ void purview_man_configure_permissions(void){
 	}
 	line_breaks(1);
 	system("pause");
-	purview_man_menu();
+	return;
 }
 
 void menu_purview_man_jump(void){

@@ -3,14 +3,16 @@
 
 
 void card_man_menu(void){
-	system("cls");
-	system("color 6f");
-	card_man_head();
-	line_breaks(1);
-	card_man_option();
-	line_breaks(2);
-	prompt_input();
-	menu_card_man_jump();
+	while (true) {
+		system("cls");
+		system("color 6f");
+		card_man_head();
+		line_breaks(1);
+		card_man_option();
+		line_breaks(2);
+		prompt_input();
+		menu_card_man_jump();
+	}
 }
 
 void card_man_head(void){
@@ -62,7 +64,7 @@ void card_man_add(void){
 	card_add_core(id, passwd, balance);
 	line_breaks(1);
 	system("pause");
-	card_man_menu();
+	return;
 }
 
 void card_get_information(void){
@@ -105,7 +107,7 @@ void card_get_information(void){
 	printf("\n²éÑ¯ºÄÊ± %lldms", stop_time - start_time);
 	line_breaks(2);
 	system("pause");
-	card_man_menu();
+	return;
 }
 
 void card_man_del(void){
@@ -133,7 +135,7 @@ void card_man_del(void){
 	}
 	line_breaks(2);
 	system("pause");
-	card_man_menu();
+	return;
 }
 
 void menu_card_man_jump(void){
