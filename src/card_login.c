@@ -112,7 +112,6 @@ void shut_core(char id[]){
 		if (feof(fp))
 			break;
 	}
-	printf("\n%d", time_left_interval);
 	if (!time_left_interval)
 		return;
 	time = time_right_interval - time_left_interval;

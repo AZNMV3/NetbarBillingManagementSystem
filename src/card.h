@@ -21,12 +21,12 @@ struct card {
 	float balance;
 };
 
-extern int card_add_core(char id[], char password[], float balance);
-extern float card_get_json_value(char id[], char password[]);
-extern void card_del_core(char id[]);
-extern bool card_has(char id[]);
-extern bool card_is_passwd_right(char id[], char password[]);
-extern void top_up(char id[], float money);
-extern void cost(char id[], float money);
-extern bool	can_card_login(char id[], char passwd[]);
+extern int card_add_core(char card_id[], char password[], float balance);
+extern float card_get_json_value(char card_id[], char password[]);
+extern void card_del_core(char card_id[]);
+extern bool card_has(char card_id[]);
+extern bool card_is_passwd_right(char card_id[], char password[]);
+extern void top_up(char card_id[], float money);
+extern void cost(char card_id[], float money);
+extern bool	can_card_login(char card_id[], char passwd[]);
 #endif

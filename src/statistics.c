@@ -9,8 +9,6 @@
 
 
 void statistics_print_out_an_user(char id[]){
-	int login_time = 0;
-	int shut_time = 0;
 	char readn[30];
 	char s[150] = "";
 	FILE *fp;
@@ -23,6 +21,7 @@ void statistics_print_out_an_user(char id[]){
 	char *data = (char*)malloc(sizeof(char)*len + 1);
 	*data = 0;
 	fseek(fp, 0, SEEK_SET);
+	readn[29] = 0;
 	puts("卡号\t消费金额\t上机时间\t下机时间");
 	while (ftell(fp) < len - 3){
 		fscanf(fp, "%s", readn);

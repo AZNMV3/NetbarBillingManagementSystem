@@ -25,6 +25,7 @@ extern void shut_log(char id[], int ago, float cost_money);
 /*ADMIN_LOGIN*/
 extern bool admin_login(void);
 extern char* win_getpass(const char* prompt);
-void now_login_admin_permissions(char user[]);
+extern void now_login_admin_permissions(char user[]);
 
+bool is_admin_file_exist(void);
 #endif

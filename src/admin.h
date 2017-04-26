@@ -3,7 +3,7 @@
 #define ADMIN_H
 
 #define MAX_USER_LEN 12
-#define MAX_PASSWD 30
+#define MAX_PASSWD 64
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -12,6 +12,7 @@
 #include <stdbool.h>
 
 #define FILE_POSITION "./data/admin.json"
+#define DATA_DIR "./data"
 
 struct admin {
 	unsigned char user[MAX_USER_LEN];
@@ -34,6 +35,6 @@ extern void admin_del_core(char name[]);
 extern bool admin_has_user(char name[]);
 extern bool admin_is_passwd_right(char name[], char password[]);
 extern void admin_set_password(char name[], char newpasswd[]);
-struct admin write_permissions(char user[]);
+extern struct admin write_permissions(char user[]);
 
 #endif

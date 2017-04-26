@@ -1,10 +1,11 @@
 #include "admin.h"
 
+void encrypt_password(char password[]);
 extern unsigned char now_login_admin[MAX_USER_LEN];
 int admin_add_core(char user[], char password[], int is_super, int allow_cardman, int allow_billman, int allow_shutman, int allow_chargeman, int allow_statman){
 	cJSON *root_json = NULL;
 	FILE *fp_1st = fopen(FILE_POSITION, "rb+");
-
+	encrypt_password(password);
 	if (fp_1st != NULL){
 //		if (!feof(fp_1st)){
 //			root_json = cJSON_CreateObject();
@@ -173,11 +174,11 @@ bool admin_is_passwd_right(char name[], char password[]){
 
 	cJSON *root_json = cJSON_Parse(data);
 	if (NULL == root_json){
-		printf("error:%s\n", cJSON_GetErrorPtr());
+		printf("\nerror:%s\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root_json);
 		return false;
 	}
-
+	encrypt_password(password);
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
 	int result = strcoll(password, cJSON_GetObjectItem(data_json, "userpass")->valuestring);
 
@@ -214,7 +215,7 @@ void admin_set_password(char name[], char newpasswd[]){
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
 	cJSON_DeleteItemFromObject(data_json, "userpass");
 	cJSON_AddItemToObject(data_json, "userpass", cJSON_CreateString(newpasswd));
-
+	encrypt_password(newpasswd);
 	char *buf = cJSON_Print(root_json);
 	FILE *fp2 = fopen(FILE_POSITION, "wb+");
 	fwrite(buf, strlen(buf), 1, fp2);
@@ -287,7 +288,6 @@ void admin_set_permission(char *name, char type, int new_value){
 		cJSON_Delete(root_json);
 		return;
 	}
-
 	cJSON *data_json = cJSON_GetObjectItem(root_json, name);
 	switch (type){
 	case 'a':cJSON_GetObjectItem(data_json, "allow_cardman")->valueint = new_value;

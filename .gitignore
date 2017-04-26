@@ -259,3 +259,6 @@ paket-files/
 data/
 *.exe
 /NetbarBillingManagementSystem.exe
+*.ico
+/resource.h
+*.rc

@@ -41,18 +41,23 @@ void on_and_shut_power_on(void){
 	char id[MAX_ID];
 	char *passwd;
 	//	char str[25];
-	printf("\n请输入卡号\n");
+	puts("\n请输入卡号");
 	scanf("%s", id);
 	passwd = win_getpass("\n请输入密码\n");
 	if(!card_has(id)){
-		printf("卡号或密码错误");
+		puts("卡号或密码错误");
+		_getch();
+		fflush(stdin);
 	}else{
 		if (can_card_login(id, passwd))
 			write_login(time_sec(), id);
-		else
-		printf("卡号或密码错误");
+		else{
+			puts("卡号、密码错误或余额不足");
+			_getch();
+			fflush(stdin);
+		}
 	}
-	system("pause");
+
 	return;
 }
 
@@ -63,10 +68,11 @@ void on_and_shut_power_off(void){
 	scanf("%s", id);
 	if(card_has(id)){
 		shut_core(id);
-		printf("\n下机成功！?您的卡余额为%.2f", card_get_json_value(id,temp));
+		printf("\n下机成功！\n您的卡余额为%.2f", card_get_json_value(id,temp));
 	}else {
 		puts("账号不存在，请检查输入！");
 	}
+
 	system("pause");
 	return;
 }

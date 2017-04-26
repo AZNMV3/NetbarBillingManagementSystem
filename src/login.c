@@ -1,7 +1,8 @@
 #include "login.h"
 #include "admin.h"
 #include "menu.h"
-
+#include <io.h>
+#include <direct.h>
 
 unsigned char now_login_admin[MAX_USER_LEN];
 struct admin now_admin;
@@ -72,4 +73,13 @@ bool admin_login(void){
 
 void now_login_admin_permissions(char user[]){
 	now_admin=write_permissions(user);
+}
+
+bool is_admin_file_exist(void){
+	signed int result= _access(FILE_POSITION, 0);
+	if(result == 0)
+		return true;
+	if (_access(DATA_DIR, 0) != 0)
+			_mkdir("data");
+	return false;
 }

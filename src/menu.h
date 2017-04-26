@@ -90,4 +90,16 @@ void menu_statistics_jump(void);
 void statistics_transactions(void);		//菜单——查询消费记录
 void statistics_total_turnover(void);		//菜单——统计总营业额
 void statistics_monthly_turnover(void);	//菜单--统计月营业额
+
+/* meun_price.c */
+void price_menu(void);
+void price_option(void);
+void price_head(void);
+void price_content(void);
+void menu_price_jump(void);
+
+void price_add_a_billing_standards(void);		//菜单——新增计费标准
+void price_check_a_billing_standards(void);	//菜单——查询计费标准
+void price_del_a_billing_standard(void);		//菜单——删除计费标准
+void price_modify_a_billing_standard(void);	//菜单——修改计费标准
 #endif

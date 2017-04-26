@@ -15,6 +15,7 @@
 extern void price_add_core(int time_left_interval, int time_right_interval, float price);
 extern float price_read(int time_sec);
 extern void price_del_core(int time_left_interval);
+extern bool is_price_file_exist(void);
 
 extern void statistics_print_out_an_user(char id[]);
 extern float statistics_between(int time_left_year, int time_left_month, int time_left_day, int time_right_year, int time_right_month, int time_right_day, int * count);

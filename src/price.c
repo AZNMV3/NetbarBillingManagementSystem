@@ -1,4 +1,6 @@
 #include"price.h"
+#include <direct.h>
+#include <io.h>
 
 
 void price_del_core(int time_left_interval){
@@ -57,7 +59,7 @@ float price_read(int time_sec){
 	while (1){
 		if (feof(fp))
 			break;
-		fscanf(fp, "%f%d%d", &price, &time_left_interval, &time_right_interval);
+		fscanf(fp, "%d%d%f", &time_left_interval, &time_right_interval, &price);
 		if (time_sec > time_left_interval && time_sec <= time_right_interval){
 			fclose(fp);
 			return price;
@@ -68,4 +70,11 @@ float price_read(int time_sec){
 
 	fclose(fp);
 	return DEFAULT_PRICE;
+}
+
+bool is_price_file_exist(void) {
+	signed int result = _access(RATE_FILE_POSITION, 0);
+	if (result == 0)
+		return true;
+	return false;
 }

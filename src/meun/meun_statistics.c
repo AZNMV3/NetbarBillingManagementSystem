@@ -42,8 +42,10 @@ void statistics_transactions(void){
 	char id[MAX_ID];
 	printf("\n=======查询消费记录======\n");
 	puts("请输入要查询的卡号");
-	if (!scanf("%s", id)){
+	if (scanf("%s", id) < 1){
 		printf("\n输入非法！退出");
+		_getch();
+		fflush(stdin);
 		return;
 	}
 	if (card_has(id)){
@@ -68,6 +70,8 @@ void statistics_total_turnover(void){
 	puts("格式:年 月 日");
 	if(!scanf("%d%d%d", &time_left_year,&time_left_month,&time_left_day)){
 		puts("\n输入非法！退出");
+		_getch();
+		fflush(stdin);
 		return;
 	}
 
@@ -75,6 +79,8 @@ void statistics_total_turnover(void){
 	puts("格式:年 月 日");
 	if (!scanf("%d%d%d", &time_right_year, &time_right_month, &time_right_day)){
 		puts("\n输入非法！退出");
+		_getch();
+		fflush(stdin);
 		return;
 	}
 	

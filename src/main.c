@@ -1,11 +1,16 @@
 #include "menu.h"
 #include "login.h"
+#include "price.h"
 
-void statistics_print_out_an_user(char id[]);
 extern struct admin now_admin;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char *argv[]){
+	if(!is_admin_file_exist())
+		purview_man_add_admin();
+	if(!is_price_file_exist()) 
+		price_add_a_billing_standards();
+	
 	while(true){
 		system("chcp 936");
 		system("cls");

@@ -41,25 +41,30 @@ void balance_man_top_up(void){
 	puts("\n=======充值======");
 	puts("请输入要充值的卡号");
 	if (!scanf("%s", id)){
-		fflush(stdin);
 		puts("\n输入非法！退出");
+		_getch();
+		fflush(stdin);
 		return;
 	}
 	puts("请输入要充值的金额:");
 	if (!scanf("%f", &money)){
-		fflush(stdin);
 		puts("\n输入非法！退出");
+		_getch();
+		fflush(stdin);
 		return;
 	}
+	ULONGLONG start_time = GetTickCount64();
+
 	if (card_has(id)){
 	top_up(id,money);
 	char temp[MAX_PASSWD];
 	float balance = card_get_json_value(id, temp);
 	printf("您已成功充值%.2f元，现在余额为%.2f\n", money, balance);
-	}
-	else {
+	}else {
 		printf("此用户不存在");
 	}
+	ULONGLONG stop_time = GetTickCount64();
+	printf("\n耗时 %lldms", stop_time - start_time);
 	line_breaks(2);
 	system("pause");
 	return;
@@ -74,8 +79,9 @@ void balance_man_withdraw(void){
 	printf("\n=======退费======\n");
 	puts("请输入要退费的卡号");
 	if (!scanf("%s", id)){
+		puts("\n输入非法！退出");
+		_getch();
 		fflush(stdin);
-		printf("\n输入非法！退出");
 		return;
 	}
 
