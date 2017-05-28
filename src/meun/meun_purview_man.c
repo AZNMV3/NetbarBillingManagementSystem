@@ -2,8 +2,9 @@
 #include "../admin.h"
 
 
-void purview_man_menu(void){
-	while (true){
+void purview_man_menu(void)
+{
+	while (true) {
 		system("cls");
 		system("color 2f");
 		purview_man_head();
@@ -15,15 +16,17 @@ void purview_man_menu(void){
 	}
 }
 
-void purview_man_head(void){
-	print_equals(80);		//打印‘=’个数 
+void purview_man_head(void)
+{
+	print_equals(80); //打印‘=’个数 
 	line_breaks(1);
 	purview_man_content();
 	line_breaks(1);
 	print_equals(80);
 }
 
-void purview_man_content(void){
+void purview_man_content(void)
+{
 	puts_center("欢迎使用本网吧计费管理系统————权限管理");
 	line_breaks(1);
 	puts_center("在权限管理您可以添加、删除管理员或者配置他们的权限。");
@@ -31,12 +34,14 @@ void purview_man_content(void){
 	line_breaks(1);
 }
 
-void purview_man_option(void){
+void purview_man_option(void)
+{
 	printf("\t【1.添加管理员】\t【2.删除管理员】\t【3.配置权限】\t【0.返回】");
 }
 
-void purview_man_add_admin(void){
-	while(true){
+void purview_man_add_admin(void)
+{
+	while (true) {
 		system("cls");
 		print_equals(80);
 		line_breaks(1);
@@ -45,14 +50,14 @@ void purview_man_add_admin(void){
 		char temp = 0;
 		printf("\n=======添加管理员======\n");
 		printf("请输入要添加的管理员的用户名(12个字符以内)\n");
-		if (!scanf("%s", user)){
+		if (!scanf("%s", user)) {
 			printf("\n输入非法！退出");
 			_getch();
 			fflush(stdin);
 			continue;
 		}
 		puts("\n请输入要添加的管理员的密码(最长15位)");
-		if (!scanf("%s", passwd)){
+		if (!scanf("%s", passwd)) {
 			printf("\n输入非法！退出");
 			_getch();
 			fflush(stdin);
@@ -62,20 +67,20 @@ void purview_man_add_admin(void){
 		int is_super = 0, allow_cardman = 0, allow_billman = 0, allow_shutman = 0, allow_chargeman = 0, allow_statman = 0;
 		puts("\n是否设为超级管理员:");
 		puts("0.普通管理员\n1.超级管理员");
-		if (!scanf("%d", &is_super)){
+		if (!scanf("%d", &is_super)) {
 			printf("\n输入非法！退出");
-			_getch();
+			MessageBoxA(NULL, "输入非法！", "权限管理", MB_OK);
 			fflush(stdin);
 			continue;
 		}
-		if (is_super !=0 && is_super != 1) {
+		if (is_super != 0 && is_super != 1) {
 			printf("\n输入非法！退出");
-			_getch();
+			MessageBoxA(NULL, "输入非法！", "权限管理", MB_OK);
 			fflush(stdin);
 			continue;
 		}
-		if (is_super){
-			allow_cardman = 1, allow_billman = 1, allow_shutman = 1, allow_chargeman = 1, allow_statman = 1;
+		if (is_super) {
+			allow_cardman = 1 , allow_billman = 1 , allow_shutman = 1 , allow_chargeman = 1 , allow_statman = 1;
 		}
 		else {
 			printf("\n请赋予管理员权限\n");
@@ -83,18 +88,23 @@ void purview_man_add_admin(void){
 			printf("\n例如:permission --a b m c s f\n");
 			printf("\npermission --");
 
-			fflush(stdin);					//清除读写缓冲区
-			while (temp != 'f'){
+			fflush(stdin); //清除读写缓冲区
+			while (temp != 'f') {
 				scanf("%c", &temp);
-				switch (temp){
-				case 'a':allow_cardman = 1; break;
-				case 'b':allow_billman = 1; break;
-				case 'm':allow_shutman = 1; break;
-				case 'c':allow_chargeman = 1; break;
-				case 's':allow_statman = 1; break;
-				case 'f': break;
+				switch (temp) {
+					case 'a': allow_cardman = 1;
+						break;
+					case 'b': allow_billman = 1;
+						break;
+					case 'm': allow_shutman = 1;
+						break;
+					case 'c': allow_chargeman = 1;
+						break;
+					case 's': allow_statman = 1;
+						break;
+					case 'f': break;
 					default
-						:break;
+					: break;
 				}
 			}
 		}
@@ -105,7 +115,8 @@ void purview_man_add_admin(void){
 	}
 }
 
-void purview_man_del_admin(void){
+void purview_man_del_admin(void)
+{
 	while (true) {
 		system("cls");
 		print_equals(80);
@@ -114,7 +125,7 @@ void purview_man_del_admin(void){
 		//	char su_passwd[MAX_PASSWD];
 		printf("\n=======删除管理员======\n");
 		printf("请输入要删除的管理员的用户名\n");
-		if (!scanf("%s", user)){
+		if (!scanf("%s", user)) {
 			printf("\n输入非法！退出");
 			_getch();
 			fflush(stdin);
@@ -125,7 +136,7 @@ void purview_man_del_admin(void){
 		fflush(stdin);
 		printf("\n输入非法！退出");
 		*/
-		if (admin_has_user(user)){
+		if (admin_has_user(user)) {
 			admin_del_core(user);
 			puts("\n此用户已被删除");
 		}
@@ -138,8 +149,9 @@ void purview_man_del_admin(void){
 	}
 }
 
-void purview_man_configure_permissions(void) {
-	while(true){
+void purview_man_configure_permissions(void)
+{
+	while (true) {
 		system("cls");
 		print_equals(80);
 		line_breaks(1);
@@ -165,17 +177,23 @@ void purview_man_configure_permissions(void) {
 		}
 		else {
 			puts("\n请选择要修改的管理员权限");
-			puts("\n1.卡管理权限\n2.计费标准管理权限 \n3.上下机管理权限 \n 4.充值退费权限 \n 5.查询统计权限");
+			puts("\n1.卡管理权限\n2.计费标准管理权限 \n3.上下机管理权限 \n4.充值退费权限 \n5.查询统计权限");
 			int value;
 			char type;
 			scanf("%d", &value);
 			switch (value) {
-			case 1:type = 'a'; break;
-			case 2:type = 'b'; break;
-			case 3:type = 'm'; break;
-			case 4:type = 'c'; break;
-			case 5:type = 's'; break;
-			default:type = 0; break;
+				case 1: type = 'a';
+					break;
+				case 2: type = 'b';
+					break;
+				case 3: type = 'm';
+					break;
+				case 4: type = 'c';
+					break;
+				case 5: type = 's';
+					break;
+				default: type = 0;
+					break;
 			}
 			fflush(stdin);
 			while (true) {
@@ -188,6 +206,7 @@ void purview_man_configure_permissions(void) {
 					admin_set_permission(user, type, value);
 					break;
 				}
+
 				puts("\n 您的输入有误，请重新输入");
 			}
 		}
@@ -197,23 +216,25 @@ void purview_man_configure_permissions(void) {
 	}
 }
 
-void menu_purview_man_jump(void){
+void menu_purview_man_jump(void)
+{
 	char input = _getch();
 	fflush(stdin);
-	switch (input){
-	case '0':index_menu();
-		break;
-	case ' ':index_menu();
-		break;
-	case 8:index_menu();			//8--BACKSPACE
-		break;
-	case '1':purview_man_add_admin();
-		break;
-	case'2':purview_man_del_admin();
-		break;
-	case'3':purview_man_configure_permissions();
-		break;
-	default:menu_wrong_prompt(); purview_man_menu();
-		break;
+	switch (input) {
+		case '0': index_menu();
+			break;
+		case ' ': index_menu();
+			break;
+		case 8: index_menu(); //8--BACKSPACE
+			break;
+		case '1': purview_man_add_admin();
+			break;
+		case'2': purview_man_del_admin();
+			break;
+		case'3': purview_man_configure_permissions();
+			break;
+		default: menu_wrong_prompt();
+			purview_man_menu();
+			break;
 	}
 }

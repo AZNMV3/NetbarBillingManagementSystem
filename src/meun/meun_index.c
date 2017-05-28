@@ -4,6 +4,7 @@
 extern unsigned char now_login_admin[MAX_USER_LEN];
 extern struct admin now_admin;
 
+
 void index_menu(void){
 	while(true){
 		system("cls");
@@ -36,7 +37,7 @@ void index_content(void){
 void index_option(void){
 	printf("\t【1.卡管理】\t【2.计费标准】\t【3.上下机】\t【4.费用管理】\t");
 	line_breaks(1);
-	printf("\t【5.统计查询】\t【6.权限管理】\t\t【0.登出】\t");
+	printf("\t【5.统计查询】\t【6.权限管理】\t\t\t【0.登 出】\t");
 }
 
 void menu_index_jump(void){

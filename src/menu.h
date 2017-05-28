@@ -53,53 +53,53 @@ extern void purview_man_del_admin(void);					//菜单——删除管理员
 extern void purview_man_configure_permissions(void);		//菜单——配置权限
 
 /* meun_on_and_shut.c */
-void on_and_shut_menu(void);
-void on_and_shut_option(void);
-void on_and_shut_head(void);
-void on_and_shut_content(void);
-void menu_on_and_shut_jump(void);
+extern void on_and_shut_menu(void);
+extern void on_and_shut_option(void);
+extern void on_and_shut_head(void);
+extern void on_and_shut_content(void);
+extern void menu_on_and_shut_jump(void);
 
-void on_and_shut_power_on(void);				//菜单——上机
-void on_and_shut_power_off(void);				//菜单——下机
+extern void on_and_shut_power_on(void);				//菜单——上机
+extern void on_and_shut_power_off(void);				//菜单——下机
 
 /* meun_balance.c */
-void balance_man_menu(void);
-void balance_man_option(void);
-void balance_man_head(void);
-void balance_man_content(void);
-void menu_balance_jump(void);
+extern void balance_man_menu(void);
+extern void balance_man_option(void);
+extern void balance_man_head(void);
+extern void balance_man_content(void);
+extern void menu_balance_jump(void);
 
-void balance_man_top_up(void);				//菜单——充值
-void balance_man_withdraw(void);			//菜单——提现
+extern void balance_man_top_up(void);				//菜单——充值
+extern void balance_man_withdraw(void);			//菜单——提现
 
 /* meun_index.c */
-void index_menu(void);
-void index_option(void);
-void index_head(void);
-void index_content(void);
-void menu_index_jump(void);
-bool can_user_enter(char type);
+extern void index_menu(void);
+extern void index_option(void);
+extern void index_head(void);
+extern void index_content(void);
+extern void menu_index_jump(void);
+extern bool can_user_enter(char type);
 
 /* meun_statistics.c */
-void statistics_menu(void);				//菜单——查询统计模块主菜单
-void statistics_option(void);				//菜单——选项
-void statistics_head(void);				//菜单——头部
-void statistics_content(void);				//菜单——欢迎信息
-void menu_statistics_jump(void);
+extern void statistics_menu(void);				//菜单——查询统计模块主菜单
+extern void statistics_option(void);				//菜单——选项
+extern void statistics_head(void);				//菜单——头部
+extern void statistics_content(void);				//菜单——欢迎信息
+extern void menu_statistics_jump(void);
 
-void statistics_transactions(void);		//菜单——查询消费记录
-void statistics_total_turnover(void);		//菜单——统计总营业额
-void statistics_monthly_turnover(void);	//菜单--统计月营业额
+extern void statistics_transactions(void);		//菜单——查询消费记录
+extern void statistics_total_turnover(void);		//菜单——统计总营业额
+extern void statistics_monthly_turnover(void);	//菜单--统计月营业额
 
 /* meun_price.c */
-void price_menu(void);
-void price_option(void);
-void price_head(void);
-void price_content(void);
-void menu_price_jump(void);
+extern void price_menu(void);
+extern void price_option(void);
+extern void price_head(void);
+extern void price_content(void);
+extern void menu_price_jump(void);
 
-void price_add_a_billing_standards(void);		//菜单——新增计费标准
-void price_check_a_billing_standards(void);	//菜单——查询计费标准
-void price_del_a_billing_standard(void);		//菜单——删除计费标准
-void price_modify_a_billing_standard(void);	//菜单——修改计费标准
+extern void price_add_a_billing_standards(void);		//菜单——新增计费标准
+extern void price_check_a_billing_standards(void);	//菜单——查询计费标准
+extern void price_del_a_billing_standard(void);		//菜单——删除计费标准
+extern void price_modify_a_billing_standard(void);	//菜单——修改计费标准
 #endif

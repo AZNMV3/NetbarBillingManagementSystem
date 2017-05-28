@@ -41,7 +41,7 @@ void card_man_add(void) {
 		line_breaks(1);
 		char id[MAX_ID];
 		char passwd[MAX_PASSWD];
-		float balance = 0;
+		double balance = 0;
 		puts("\n=======添加卡======");
 		puts("请输入身份证号或护照号(即卡号)");
 		if (!scanf("%s", id)) {
@@ -59,7 +59,7 @@ void card_man_add(void) {
 		}
 
 		puts("\n请输入开卡金额");
-		if (!scanf("%f", &balance)) {
+		if (!scanf("%lf", &balance)) {
 			printf("\n输入非法！退出");
 			_getch();
 			fflush(stdin);
@@ -77,7 +77,7 @@ void card_get_information(void){
 		system("cls");
 		print_equals(80);
 		line_breaks(1);
-		float balance = 0;
+		double balance = 0;
 		char id[MAX_ID];
 		char passwd[MAX_PASSWD];
 
@@ -136,7 +136,7 @@ void card_man_del(void) {
 		}
 
 		if (card_has(id)) {
-			float balance = card_get_json_value(id, temp);
+			double balance = card_get_json_value(id, temp);
 			card_del_core(id);
 			puts("\n此用户已被删除");
 			printf("\n应退费%f元\n", balance);

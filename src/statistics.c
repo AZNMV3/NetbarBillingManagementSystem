@@ -1,6 +1,7 @@
 #include "price.h"
 #include "./include/cJSON.h"
 #include "card.h"
+#include <errno.h>
 #include <stdbool.h>
 #include <time.h>
 #define SAME_MONTH_SAME_YEAR 3
@@ -8,12 +9,14 @@
 #define DIFF_MONTH_DIFF_YEAR 1
 
 
-void statistics_print_out_an_user(char id[]){
+void statistics_print_out_an_user(char id[])
+{
 	char readn[30];
 	char s[150] = "";
 	FILE *fp;
 	if ((fp = fopen("./data/log.txt", "r")) == NULL){
-		printf("Can't Open File!");
+		puts("Can't Open File!"); 
+		printf("error value: %d, %s\n", errno, strerror(errno));
 		return;
 	}
 	fseek(fp, 0, SEEK_END);
@@ -32,7 +35,8 @@ void statistics_print_out_an_user(char id[]){
 	}
 	fclose(fp);//关闭文件
 }
-void statistics_print_out_an_month(void){
+void statistics_print_out_an_month(void)
+{
 	time_t get_now_time;
 	time(&get_now_time);
 	struct tm *now= localtime(&get_now_time);
@@ -61,6 +65,7 @@ void statistics_print_out_an_month(void){
 	FILE *fp;
 	if ((fp = fopen(MONTH_STAT_FILE_POSITION, "w+")) == NULL){
 		printf("Open Failed.\n");
+		printf("error value: %d, %s",errno,strerror(errno));
 		return;
 	}
 	fprintf(fp, "各月统计\n");
@@ -71,7 +76,8 @@ void statistics_print_out_an_month(void){
 	fclose(fp);
 }
 
-float statistics_between(int time_left_year, int time_left_month, int time_left_day, int time_right_year, int time_right_month, int time_right_day, int *count){
+float statistics_between(int time_left_year, int time_left_month, int time_left_day, int time_right_year, int time_right_month, int time_right_day, int *count)
+{
 	*count = 0;
 	struct time {
 		int year;
@@ -87,7 +93,8 @@ float statistics_between(int time_left_year, int time_left_month, int time_left_
 	char readin_id[MAX_ID];
 	FILE *fp;
 	if ((fp = fopen("./data/log.txt", "r")) == NULL){
-		printf("Can't Open File!");
+		puts("Can't Open File!");
+		printf("error value: %d, %s\n", errno, strerror(errno));
 		return 0;
 	}
 	fseek(fp, 0, SEEK_END);

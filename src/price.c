@@ -1,7 +1,7 @@
 #include"price.h"
 #include <direct.h>
 #include <io.h>
-
+#include <errno.h>
 
 void price_del_core(int time_left_interval){
 	FILE *fp;
@@ -10,7 +10,8 @@ void price_del_core(int time_left_interval){
 	int n;				//保存左区间秒数 
 
 	if ((fp = fopen(RATE_FILE_POSITION, "r")) == NULL){
-		printf("Can't Open File!");
+		puts("Can't Open File!");
+		printf("error value: %d, %s\n", errno, strerror(errno));
 		return;
 	}
 
@@ -40,7 +41,8 @@ void price_del_core(int time_left_interval){
 void price_add_core(int time_left_interval, int time_right_interval, float price){
 	FILE *fp = NULL;
 	if ((fp = fopen(RATE_FILE_POSITION, "a+")) == NULL){
-		printf("Can't Open File!");
+		puts("Can't Open File!");
+		printf("error value: %d, %s\n", errno, strerror(errno));
 		return;
 	}
 	fprintf(fp, "%d%c%d%c%.2f%c", time_left_interval, ' ', time_right_interval, ' ', price, '\n');
@@ -54,6 +56,7 @@ float price_read(int time_sec){
 	FILE *fp = NULL;
 	if ((fp = fopen(RATE_FILE_POSITION, "r")) == NULL){
 		printf("File Open Failed.\n");
+		printf("error value: %d, %s\n", errno, strerror(errno));
 		return DEFAULT_PRICE;
 	}
 	while (1){

@@ -35,6 +35,6 @@ extern void admin_del_core(char name[]);
 extern bool admin_has_user(char name[]);
 extern bool admin_is_passwd_right(char name[], char password[]);
 extern void admin_set_password(char name[], char newpasswd[]);
-extern struct admin write_permissions(char user[]);
+extern struct admin _write_permissions(char user[]);
 
 #endif

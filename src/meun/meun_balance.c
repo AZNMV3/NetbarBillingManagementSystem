@@ -48,7 +48,7 @@ void balance_man_top_up(void){
 	}
 	puts("请输入要充值的金额:");
 	if (!scanf("%f", &money)){
-		puts("\n输入非法！退出");
+		puts("\n输入非法！退出");	
 		_getch();
 		fflush(stdin);
 		return;
